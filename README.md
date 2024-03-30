@@ -12,8 +12,8 @@ Maximizing job application success through an automatic resume tailor. Using Lar
 
 # UI/UX
 
-https://www.resumematcher.fyi/
-https://www.youtube.com/watch?v=UGazvOuWkZo&ab_channel=KirkWatson
+- https://www.resumematcher.fyi/
+- https://www.youtube.com/watch?v=UGazvOuWkZo&ab_channel=KirkWatson
 
 # Notes
 
