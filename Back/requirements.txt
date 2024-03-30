@@ -4,7 +4,7 @@ pymongo[srv]
 Flask-PyMongo
 requests
 beautifulsoup4
-dotenv
+python-dotenv
 openai
 
 
