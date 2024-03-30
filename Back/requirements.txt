@@ -1,6 +1,11 @@
 Flask
+flask_cors
 pymongo[srv]
 Flask-PyMongo
+requests
+beautifulsoup4
+dotenv
+openai
 
 
 
