@@ -1,7 +1,7 @@
 import os
 import spacy
 from spacy.cli import download
-import params
+import Back.params as params
 
 os.environ['KMP_DUPLICATE_LIB_OK']='True'
 

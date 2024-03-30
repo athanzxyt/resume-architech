@@ -4,9 +4,10 @@ from flask import request
 app = Flask(__name__)
 
 import db
-from scraper import get_repos
 import json
 import pandas as pd
+
+from scraper import get_repos
 from vectorize import sort_by_similarity, embed_data
 
 @app.route("/getprojects")
