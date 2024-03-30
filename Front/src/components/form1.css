@@ -5,13 +5,13 @@
     justify-content: center;
     gap: 10px; /* Space between inputs */
     width: 100%; /* Full width */
-    max-width: 400px; /* Maximum width of the container */
+    max-width: 1000px; /* Maximum width of the container */
     margin: 0 auto; /* Center the container horizontally */
     padding: 20px; /* Padding around the inputs */
   }
   
   .sign-up-container input[type='text'] {
-    width: 100%; /* Full width of the container */
+    width: 750px; /* Full width of the container */
     padding: 10px; /* Padding inside the inputs */
     margin: 5px 0; /* Margin around each input */
     box-sizing: border-box; /* Include padding in the input width */
