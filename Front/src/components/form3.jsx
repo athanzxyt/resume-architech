@@ -7,7 +7,7 @@ function form3() {
   let [ghUsername, setGhUsername] = useState("");
   const submit = () => {
     axios
-      .get(`http://localhost:8000/getprojects?username=${ghUsername}`)
+      .post("http://localhost:8000/getprojects", { username: ghUsername })
       .then((res) => {
         console.log(res);
       })
