@@ -12,10 +12,24 @@ import pandas as pd
 from scraper import get_repos
 from vectorize import sort_by_similarity, embed_data
 
-@app.route("/getprojects")
-def getprojects():
-    username = request.args.get('username')
+@app.route("/")
+def home():
+    return "Hello, World!"
 
+@app.route("/checkusername", methods=['POST'])
+def checkusername():
+    username = request.json['username']
+
+    existing_user = db.db.collection.find_one({"username": username})
+    if existing_user == None:
+        return jsonify({"exists": False})
+    else:
+        return jsonify({"exists": True})
+
+@app.route("/getprojects", methods=['post'])
+def getprojects():
+    username = request.json['username']
+ 
     existing_user = db.db.collection.find_one({"username": username})
     if existing_user == None or 'repos' not in existing_user:
         repos = get_repos(username)
