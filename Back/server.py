@@ -13,11 +13,18 @@ from vectorize import sort_by_similarity, embed_data
 @app.route("/getprojects")
 def getprojects():
     username = request.args.get('username')
-    # repos = get_repos(username)
-    # db.db.collection.insert_one({"username": username, "repos": repos})
-    db.db.collection.insert_one({"username": 'bob'})
-    # return jsonify(repos)
-    return "connected!"
+
+    existing_user = db.db.collection.find_one({"username": username})
+    if existing_user == None or 'repos' not in existing_user:
+        repos = get_repos(username)
+        db.db.collection.insert_one({"username": username, "repos": repos})
+        return jsonify(repos)
+    else:
+        return jsonify(existing_user['repos'])
+
+@app.route("/generatebullets")
+def genbullets():
+    return "generating!!"
 
 @app.route("/sortbullets")
 def getmostsimilar():
@@ -32,6 +39,7 @@ def getmostsimilar():
     job_desc = open("dummyjob.txt", "r").read()
 
     return sort_by_similarity(job_desc, embed_data(data)).to_json()
+
 
 
 if __name__ == '__main__':
