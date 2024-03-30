@@ -1,7 +1,7 @@
 from openai import OpenAI
 import os
 from dotenv import load_dotenv
-from pathlib import Path
+
 
 
 def get_bullet_points(project):
