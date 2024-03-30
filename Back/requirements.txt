@@ -1,12 +1,15 @@
 Flask
-flask_cors
+Flask-Cors
 pymongo[srv]
 Flask-PyMongo
 requests
 beautifulsoup4
 python-dotenv
 openai
-
+pandas
+numpy
+transformers
+tensorflow
 
 
 
