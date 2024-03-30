@@ -1,7 +1,14 @@
 # resume-architech
 Maximizing job application success through an automatic resume tailor. Using Large Language Models and Semantic Vector Search to maximize candidate potential.
 
+# Structure
+
+1. **Expansion:** A user uploads all current background information either via text or file upload to be parsed. Then Resume Architech will work with the user bullet-by-bullet to improve and generate new bullet points using the STAR method, expanding their experience description to 10-100 bullets.
+2. **Selection:** Given a designated job description, perform a similarity search using vector embeddings. Rank all bullets based on the similarity. Then use keyword search to match certain bullets to keywords wanted in the description.
+3. **Generation:** Given the ranked bullets, generate a one-page resume by removing least useful bullets first until the designated information is one page. Format using LaTeX.
+
 https://www.resumematcher.fyi/
+https://www.youtube.com/watch?v=UGazvOuWkZo&ab_channel=KirkWatson
 
 
 Tailoring
