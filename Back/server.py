@@ -42,7 +42,5 @@ def getmostsimilar():
 
     return sort_by_similarity(job_desc, embed_data(data)).to_json()
 
-
-
 if __name__ == '__main__':
     app.run(port=8000)
