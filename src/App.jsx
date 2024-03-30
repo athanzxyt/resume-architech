@@ -1,16 +1,23 @@
 import React from 'react'
-import Navbar from "./components/Navbar";
-import HeroSection from './components/HeroSection';
+import {Routes, Route} from 'react-router-dom'
+import NoPage from './pages/NoPage.jsx'
+import Landing from './pages/Landing.jsx';
+import PersonalInfo from './pages/PersonalInfo.jsx'
+import JobInfo from './pages/JobInfo.jsx'
+import FinalizeResume from './pages/FinalizeResume.jsx'
 
-const App = () => {
+
+export default function App() {
     return (
-        <>
-            <Navbar />
-            <div className="max-w-7xl mx-auto pt-20 px-6">
-                <HeroSection/>
-            </div>
-        </>
-    );
-};
 
-export default App
+        <div>
+            <Routes>
+                <Route path = "/" element = {<Landing />} />
+                <Route path = "/personal-info" element = {<PersonalInfo />} />
+                <Route path = "/job-info" element = {<JobInfo />} />
+                <Route path = "/finalize-resume" element = {<FinalizeResume />} />
+                <Route path = "*" element = {<NoPage />} />
+            </Routes>
+        </div>
+    )
+}

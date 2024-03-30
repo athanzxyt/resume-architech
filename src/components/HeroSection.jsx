@@ -3,7 +3,7 @@ import './HeroSection.css';
 
 const HeroSection = () => {
   const [typewriterText, setTypewriterText] = useState('');
-  const phrases = ["faster", "tailored", "more powerful"];
+  const phrases = ["faster ", "tailored ", "more powerful "];
   let phraseIndex = 0;
   let charIndex = 0;
   let isDeleting = false;
@@ -44,13 +44,12 @@ const HeroSection = () => {
         <span id="cursor" className="cursor">|</span>
       </h1>
       <p className="mt-10 text-lg text-center text-neutral-500 max-w-4xl">
-        Empower your creativity and bring your VR app ideas to life with our
-        intuitive development tools. Get started today and turn your imagination
-        into immersive reality!
+        Maximize job application success through automatic resume tailoring.
+        <br/> Get started today and land your dream role!
       </p>
       <div className="flex justify-center my-10 space-x-12 items-center">
         <a
-          href="#"
+          href="personal-info"
           className="bg-gradient-to-r from-yellow-100 to-green-200 py-3 px-4 border rounded-lg"
         >
           Get Started
