@@ -127,7 +127,14 @@ export default function form3() {
                   <span>
                     {index + 1}: {Experience.name}
                   </span>
-                  <span>Delete</span>
+                  <span
+                    style={{ cursor: "pointer" }}
+                    onClick={() => {
+                      deleteExperience(Experience.name);
+                    }}
+                  >
+                    Delete
+                  </span>
                 </li>
               ))}
             </ul>
