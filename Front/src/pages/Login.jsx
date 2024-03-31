@@ -1,14 +1,16 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
-import NavBar from '../components/Navbar.jsx'
+import NavBar from "../components/Navbar.jsx";
 
 function Login() {
   let [username, setUsername] = useState("");
 
   const signup = () => {
     axios
-      .post("http://localhost:8000/checkusername", { username: username })
+      .post("https://resume-architech-flask.onrender.com/checkusername", {
+        username: username,
+      })
       .then((res) => {
         if (res.data.exists) {
           alert("Username already exists");
@@ -24,7 +26,9 @@ function Login() {
 
   const login = () => {
     axios
-      .post("http://localhost:8000/checkusername", { username: username })
+      .post("https://resume-architech-flask.onrender.com/checkusername", {
+        username: username,
+      })
       .then((res) => {
         if (res.data.exists) {
           localStorage.setItem("username", username);
@@ -40,10 +44,10 @@ function Login() {
 
   return (
     <>
-    <NavBar />
+      <NavBar />
       <div className="sign-up-container w-full">
         <div className="header text-4xl sm:text-6xl lg:text-7xl text-center tracking-wide lg:mt-40">
-        Login
+          Login
         </div>
         <input
           type="text"
@@ -57,7 +61,6 @@ function Login() {
         </div>
       </div>
     </>
-
   );
 }
 
