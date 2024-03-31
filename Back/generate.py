@@ -6,6 +6,7 @@ from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 from docx.enum.text import WD_PARAGRAPH_ALIGNMENT
 from docx.enum.table import WD_ALIGN_VERTICAL
+import convertapi
 
 from docx2pdf import convert
 
@@ -273,5 +274,8 @@ def make_resume(df_exp, df_proj, user):
 
     filename = f'./pdfs/{user["username"]}_resume'
     doc.save(f'{filename}.docx')
-    convert(f'{filename}.docx', f'{filename}.pdf')
+    convertapi.api_secret = 'vMV9HlzuZqcvbV0G'
+    convertapi.convert('pdf', {
+        'File': f'{filename}.docx'
+    }, from_format = 'docx').save_files('./pdfs')
     return filename

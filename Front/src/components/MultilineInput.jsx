@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Document, Page, pdfjs } from "react-pdf";
+import { Row, Col, Container } from "react-bootstrap";
 
 function MultilineInput() {
   const [textValue, setTextValue] = useState("");
   const [downloadPath, setDownloadPath] = useState("");
-
-  const [numPages, setNumPages] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const onDocumentLoadSuccess = ({ numPages }) => {
     setNumPages(numPages);
@@ -17,12 +17,15 @@ function MultilineInput() {
   };
 
   const handleSubmit = () => {
+    if (loading) return;
+    setLoading(true);
     axios
       .post("http://localhost:8000/getresume", {
         username: window.localStorage.getItem("username"),
         job: textValue,
       })
       .then((res) => {
+        setLoading(false);
         console.log(res.data);
         setDownloadPath(
           `http://localhost:8000/download/${window.localStorage.getItem(
@@ -36,70 +39,79 @@ function MultilineInput() {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100vh",
-        width: "50vw",
-        position: "absolute",
-        left: "0",
-        top: "0",
-        padding: "70px",
-      }}
-    >
-      <div className="border-2 border-[#55c1bd] p-2.5 mb-5 text-center w-full box-border">
-        Enter job description:
-      </div>
-      <textarea
-        value={textValue}
-        onChange={handleChange}
-        placeholder="Enter your text here"
-        style={{
-          width: "100%",
-          height: "150px",
-          padding: "10px",
-          boxSizing: "border-box",
-          resize: "none",
-          outline: "2px solid #55c1bd",
-          borderRadius: "5px",
-          marginBottom: "20px",
-        }}
-      />
-
-      <button
-        onClick={handleSubmit}
-        style={{
-          padding: "10px 20px",
-          border: "1px solid #d0d0d0",
-          backgroundColor: "#f0f0f0",
-          borderRadius: "5px",
-          cursor: "pointer",
-          transition: "background-color 0.3s",
-        }}
-      >
-        Submit
-      </button>
-      {downloadPath && (
-        <a href={downloadPath} target="_blank">
-          <button
+    <Container className="text-center">
+      <h1 className="display-2 my-5">Apply</h1>
+      <Row>
+        <Col>
+          <div className="border-2 border-[#55c1bd] p-2.5 mb-2 text-center w-full box-border">
+            Enter job description:
+          </div>
+          <textarea
+            value={textValue}
+            onChange={handleChange}
+            placeholder="Enter your text here"
             style={{
-              padding: "10px 20px",
-              border: "1px solid #d0d0d0",
-              backgroundColor: "#f0f0f0",
+              width: "100%",
+              height: "300px",
+              padding: "10px",
+              boxSizing: "border-box",
+              resize: "none",
+              outline: "2px solid #55c1bd",
               borderRadius: "5px",
-              cursor: "pointer",
-              transition: "background-color 0.3s",
+              marginBottom: "20px",
             }}
-          >
-            Download
-          </button>
-          <iframe src={downloadPath} frameborder="0"></iframe>
-        </a>
-      )}
-    </div>
+          />
+
+          <div className="d-flex align-items-center justify-content-center">
+            <button
+              onClick={handleSubmit}
+              style={{
+                padding: "10px 20px",
+                border: "1px solid #d0d0d0",
+                backgroundColor: "#f0f0f0",
+                borderRadius: "5px",
+                cursor: "pointer",
+                transition: "background-color 0.3s",
+              }}
+            >
+              Submit
+            </button>
+            {loading && (
+              <div class="spinner-border m-2" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+            )}
+          </div>
+        </Col>
+        <Col>
+          {true && (
+            <>
+              <iframe
+                src={"http://localhost:8000/download/tim"}
+                // src={downloadPath}
+                frameborder="0"
+                style={{ width: "100%", height: "100%" }}
+              ></iframe>
+              <a href={downloadPath} target="_blank">
+                <button
+                  className="mt-3"
+                  style={{
+                    padding: "10px 20px",
+                    border: "1px solid #d0d0d0",
+                    backgroundColor: "#f0f0f0",
+                    borderRadius: "5px",
+                    cursor: "pointer",
+                    transition: "background-color 0.3s",
+                  }}
+                >
+                  Download
+                </button>
+              </a>
+            </>
+          )}
+        </Col>
+      </Row>
+    </Container>
   );
 }
 

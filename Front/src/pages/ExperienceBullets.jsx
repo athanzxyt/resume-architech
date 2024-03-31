@@ -40,7 +40,7 @@ export default function ExperienceBullets() {
 
   return (
     <>
-      <Container className="py-3 my-2 text-center">
+      <Container className="py-1 my-2 text-center">
         <h1 className="display-2">Experiences</h1>
         <Button className="my-3" onClick={saveBullets}>
           Save Bullets

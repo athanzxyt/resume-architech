@@ -3,8 +3,8 @@ import axios from "axios";
 import { Accordion, Button } from "react-bootstrap";
 import { Container } from "react-bootstrap";
 import "../components/ProjectBullets.css";
-import NavBar from "../components/Navbar"
-import Footer from "../components/Footer"
+import NavBar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 export default function ProjectBullets() {
   let [projects, setProjects] = useState([]);
@@ -42,7 +42,7 @@ export default function ProjectBullets() {
 
   return (
     <>
-      <Container className="py-3 my-2 text-center">
+      <Container className="py-1 my-2 text-center">
         <h1 className="display-2">Projects</h1>
         <Button className="my-3" onClick={saveBullets}>
           Save Bullets
