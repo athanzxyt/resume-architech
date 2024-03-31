@@ -15,7 +15,7 @@ export default function ExperienceBullets() {
         },
       })
       .then((res) => {
-        setExperiences(res.data.experiences);
+        setExperiences(res.data.experiences ?? {});
         console.log(res.data.experiences);
       })
       .catch((err) => {

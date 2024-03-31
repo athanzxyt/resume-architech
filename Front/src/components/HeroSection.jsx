@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import './HeroSection.css';
 
+import printer from '../assets/printergif.gif';
+
 const HeroSection = () => {
   const [typewriterText, setTypewriterText] = useState('');
   const phrases = ["faster ", "tailored ", "more powerful "];
@@ -38,7 +40,8 @@ const HeroSection = () => {
   }, []);
   
   return (
-    <div className="flex flex-col items-center mt-6 lg:mt-40">
+    <div className="flex flex-col items-center mt-6 lg:mt-10">
+      <img src={printer} alt="loading..." />
       <h1 className="text-4xl sm:text-6xl lg:text-7xl text-center tracking-wide">
         Your resume, <br /> but <span id="typewriter">{typewriterText}</span>
         <span id="cursor" className="cursor">|</span>

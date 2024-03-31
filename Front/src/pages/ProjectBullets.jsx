@@ -17,7 +17,7 @@ export default function ProjectBullets() {
         },
       })
       .then((res) => {
-        setProjects(res.data.repos);
+        setProjects(res.data.repos ?? {});
         console.log(res.data.repos);
       })
       .catch((err) => {
@@ -42,7 +42,6 @@ export default function ProjectBullets() {
 
   return (
     <>
-      <NavBar />
       <Container className="py-3 my-2 text-center">
         <h1 className="display-2">Projects</h1>
         <Button className="my-3" onClick={saveBullets}>
@@ -79,7 +78,6 @@ export default function ProjectBullets() {
           })}
         </Accordion>
       </Container>
-      <Footer />
     </>
   );
 }
