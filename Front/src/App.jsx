@@ -7,6 +7,7 @@ import JobInfo from "./pages/JobInfo.jsx";
 import FinalizeResume from "./pages/FinalizeResume.jsx";
 import Login from "./pages/Login.jsx";
 import Logout from "./pages/Logout.jsx";
+import MyProjects from "./pages/MyProjects.jsx";
 
 export default function App() {
   let authenticated = localStorage.getItem("username") ? true : false;
@@ -21,6 +22,14 @@ export default function App() {
           element={
             <PR>
               <PersonalInfo />
+            </PR>
+          }
+        />
+        <Route
+          path="/myprojects"
+          element={
+            <PR>
+              <MyProjects />
             </PR>
           }
         />

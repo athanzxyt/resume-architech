@@ -8,6 +8,7 @@ CORS(app)
 import db
 import json
 import pandas as pd
+from bson.json_util import dumps, loads 
 
 from scraper import get_repos
 from vectorize import sort_by_similarity, embed_data
@@ -26,21 +27,56 @@ def checkusername():
     else:
         return jsonify({"exists": True})
 
-@app.route("/getprojects", methods=['post'])
-def getprojects():
-    username = request.json['username']
- 
+@app.route("/getprojects", methods=['get'])
+def getuserprojects():
+    username = request.args.get('username')
+    # print(username)
     existing_user = db.db.collection.find_one({"username": username})
-    if existing_user == None or 'repos' not in existing_user:
-        repos = get_repos(username)
-        db.db.collection.insert_one({"username": username, "repos": repos})
-        return jsonify(repos)
+    return json.loads(dumps(existing_user))
+    
+@app.route("/setuserinfo", methods=['post'])    
+def setuserinfo():
+    data = request.json
+    existing_user = db.db.collection.find_one({"username": data['username']})
+    if existing_user != None:
+        if existing_user.get("github") != data['github']:
+            repos = get_repos(data['github'])
+        else:
+            repos = existing_user['repos']
+        db.db.collection.update_one({"username": data['username']}, {"$set":{**data, "repos": repos}})
+        return "updated"
     else:
-        return jsonify(existing_user['repos'])
+        repos = get_repos(data['github'])
+        db.db.collection.insert_one({**data, "repos": repos})
+        return "inserted"
+    
+@app.route("/addproject", methods=['post']) 
+def addproject():
+    data = request.json
+    existing_user = db.db.collection.find_one({"username": data['username']})
+    if existing_user != None:
+        db.db.collection.update_one({"username": data['username']}, {"$set":{f"repos.{data['project']['name']}": data['project']}})
+        existing_user = db.db.collection.find_one({"username": data['username']})
+        return json.loads(dumps(existing_user))
+    else:
+        return "user not found"
 
 @app.route("/generatebullets")
 def genbullets():
     return "generating!!"
+
+@app.route("/clear")
+def clear():
+    db.db.collection.delete_many({})
+    return "cleared"
+
+@app.route("/viewall")
+def viewall():
+    cursor = db.db.collection.find({})
+    list_cur = list(cursor) 
+    json_data = dumps(list_cur, indent = 2)  
+    return json_data
+
 
 @app.route("/sortbullets")
 def getmostsimilar():
