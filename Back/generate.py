@@ -206,7 +206,21 @@ def rank(df_exp, df_proj, budget = 30):
         else:
             break   
 
-    return selected_exp, selected_proj
+    exp = {}
+    for row in selected_exp:
+        if row['title'] in exp:
+            exp[row['title']].append(row['bullet'])
+        else:
+            exp[row['title']] = [row['bullet']]
+
+    proj = {}
+    for row in selected_proj:
+        if row['title'] in proj:
+            proj[row['title']].append(row['bullet'])
+        else:
+            proj[row['title']] = [row['bullet']]
+
+    return exp, proj
 
 def make_resume(df_exp, df_proj, username):
     doc = Document()
@@ -224,16 +238,17 @@ def make_resume(df_exp, df_proj, username):
     add_education(doc, 'University of Illinois Urbana-Champaign', 'Bachelor of Science', 'Computer Science', 'May 2020')
 
     exp, proj = rank(df_exp, df_proj)
-    print(exp)
 
-    add_section_title(doc, 'Experience')
-    for row in exp:
-        print(f'Adding experience: {row["title"]}: {row["bullet"]}')
+    # add_section_title(doc, 'Experience')
+    # for row in exp:
         # add_experience(doc, row['title'], row['company'], row['dates'], bullets=row['bullets'])
 
-    # add_section_title(doc, 'Projects')
-    # for _, row in proj.iterrows():
-    #     add_project(doc, row['title'], row['bullets'])
+    add_section_title(doc, 'Projects')
+    for row in proj:
+        # print(f'Adding project: {row}')
+        # for b in proj[row]:
+        #     print(f'B: {b[3:]}')
+        add_project(doc, row, proj[row][3:])
 
     filename = f'./pdfs/{username}_resume.docx'
     doc.save(filename)
