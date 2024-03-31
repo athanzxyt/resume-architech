@@ -17,6 +17,7 @@ scikit-learn
 convertapi
 tf-keras
 torch
+gunicorn
 
 
 
