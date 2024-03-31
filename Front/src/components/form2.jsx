@@ -3,7 +3,7 @@ import "./form1.css";
 
 function form2(props) {
   return (
-    <div className="sign-up-container">
+    <div className="sign-up-container max-1600">
       <input
         type="text"
         placeholder="School"
