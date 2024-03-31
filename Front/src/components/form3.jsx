@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./form1.css";
 
-export default function ExperienceInput() {
+export default function form3() {
   let [Experiences, setExperiences] = useState([]);
   let [ExperienceName, setExperienceName] = useState("");
   let [ExperienceDescription, setExperienceDescription] = useState("");
@@ -78,12 +78,12 @@ export default function ExperienceInput() {
   };
 
   return (
-    <div className="sign-up-container">
+    <div className="w-screen">
         <div className="grid grid-cols-2 gap-4 p-8">
-        <div className="flex flex-col p-8">
-            <h1 className='text-3xl font-bold pb-4'>Add Experiences</h1>
+        <div className="flex flex-col p-8 w-full">
+            <h1 className='text-3xl font-bold pb-4 '>Add Experiences</h1>
             <input
-                className='border-2 rounded-md p-2 mb-4'
+                className='w-full border-2 rounded-md p-2 mb-4 text-white placeholder-gray-200'
                 type="text"
                 placeholder="Experience Name"
                 value={ExperienceName}

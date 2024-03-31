@@ -87,7 +87,7 @@ function Form() {
           </div>
         </div>
   
-        <div className="header text-4xl text-7xl mt-0">
+        <div className="header text-4xl text-7xl mt-">
           {FormTitles[page]}
         </div>
         <div className="body">{PageDisplay()}</div>
