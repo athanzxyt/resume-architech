@@ -4,6 +4,7 @@ import "./form1.css";
 
 export default function form4(props) {
   let [projects, setProjects] = useState([]);
+  let [ghLoading, setGhLoading] = useState(false);
   let [projectName, setProjectName] = useState("");
   let [projectDescription, setProjectDescription] = useState("");
 
@@ -64,8 +65,23 @@ export default function form4(props) {
       });
   };
 
-  const sendGHUser = () => {
-
+  const scrapeGithub = () => {
+    setGhLoading(true);
+    axios
+      .post("http://localhost:8000/scrapegithub", {
+        username: window.localStorage.getItem("username"),
+        github: props.inputs.github,
+      })
+      .then((res) => {
+        setGhLoading(false);
+        console.log(res.data);
+        setProjects(res.data.repos);
+        setProjectName("");
+        setProjectDescription("");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const generate = () => {
@@ -95,12 +111,20 @@ export default function form4(props) {
             value={props.inputs.github}
             onChange={(e) => props.setInputs("github", e.target.value)}
           />
-          <button
-            className="w-1/2 p-2 border-2 rounded-md mb-8"
-            onClick={addProject} // NEED TO CHANGE THIS TO A DIFF FUNCTION
-          > Scrape GitHub
-          </button>
-
+          <div className="flex flex-row">
+            <button
+              className="w-1/2 p-2 border-2 rounded-md mb-8 mr-4"
+              onClick={scrapeGithub} // NEED TO CHANGE THIS TO A DIFF FUNCTION
+            >
+              {" "}
+              Scrape GitHub
+            </button>
+            {ghLoading && (
+              <div class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+            )}
+          </div>
           <h1 className="text-3xl font-bold pb-4">Add Additional Projects</h1>
           <input
             className="border-2 rounded-md p-2 mb-4"
@@ -121,10 +145,7 @@ export default function form4(props) {
           >
             Add
           </button>
-          <button
-            className="w-1/2 p-2 border-2 rounded-md"
-            onClick={generate}
-          >
+          <button className="w-1/2 p-2 border-2 rounded-md" onClick={generate}>
             Generate Bullets
           </button>
         </div>

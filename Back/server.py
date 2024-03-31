@@ -60,8 +60,9 @@ def scrapegithub():
     existing_user = db.db.collection.find_one({"username": data['username']})
     if existing_user != None:
         repos = get_repos(data['github'])
-        db.db.collection.update_one({"username": data['username']}, {"$set":{**data, "repos": repos}})
-        return "updated"
+        db.db.collection.update_one({"username": data['username']}, {"$set":{"github":data['github'], "repos": {**existing_user['repos'], **repos}}})
+        existing_user = db.db.collection.find_one({"username": data['username']})
+        return json.loads(dumps(existing_user))
     else:
         return "no user found"
     
