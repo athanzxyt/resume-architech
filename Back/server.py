@@ -52,7 +52,7 @@ def setuserinfo():
         return "inserted"
     
 @app.route("/updateprojects", methods=['post']) 
-def addproject():
+def updateprojects():
     data = request.json
     existing_user = db.db.collection.find_one({"username": data['username']})
     if existing_user != None:
