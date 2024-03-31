@@ -142,9 +142,9 @@ def getresume():
 @app.route("/download/<string:username>", methods=['GET'])
 def return_pdf(username):
     try:
-        file_path = f'./pdfs/{username}_resume.docx'
+        file_path = f'./pdfs/{username}_resume.pdf'
         if os.path.isfile(file_path):
-            return send_file(file_path, as_attachment=False)
+            return send_file(file_path, as_attachment=False, mimetype='application/pdf', )
         else:
             return make_response(f"File '{username}' not found.", 404)
     except Exception as e:
