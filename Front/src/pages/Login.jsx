@@ -8,7 +8,7 @@ function Login() {
 
   const signup = () => {
     axios
-      .post("https://resume-architech-flask.onrender.com/checkusername", {
+      .post("https://7c906c947c74.ngrok.app/checkusername", {
         username: username,
       })
       .then((res) => {
@@ -26,7 +26,7 @@ function Login() {
 
   const login = () => {
     axios
-      .post("https://resume-architech-flask.onrender.com/checkusername", {
+      .post("https://7c906c947c74.ngrok.app/checkusername", {
         username: username,
       })
       .then((res) => {

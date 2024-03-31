@@ -11,7 +11,7 @@ export default function ProjectBullets() {
 
   useEffect(() => {
     axios
-      .get("https://resume-architech-flask.onrender.com/getuser", {
+      .get("https://7c906c947c74.ngrok.app/getuser", {
         params: {
           username: window.localStorage.getItem("username"),
         },
@@ -27,7 +27,7 @@ export default function ProjectBullets() {
 
   const saveBullets = () => {
     axios
-      .post("https://resume-architech-flask.onrender.com/updateprojects", {
+      .post("https://7c906c947c74.ngrok.app/updateprojects", {
         username: window.localStorage.getItem("username"),
         repos: projects,
       })

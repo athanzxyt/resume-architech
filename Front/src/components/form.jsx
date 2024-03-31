@@ -31,7 +31,7 @@ function Form() {
 
   useEffect(() => {
     axios
-      .get("https://resume-architech-flask.onrender.com/getuser", {
+      .get("https://7c906c947c74.ngrok.app/getuser", {
         params: {
           username: window.localStorage.getItem("username"),
         },
@@ -53,7 +53,7 @@ function Form() {
     console.log(formInputs);
     setLoading(true);
     axios
-      .post("https://resume-architech-flask.onrender.com/generatebullets", {
+      .post("https://7c906c947c74.ngrok.app/generatebullets", {
         username: window.localStorage.getItem("username"),
       })
       .then((res) => {
@@ -68,7 +68,7 @@ function Form() {
 
   const changePage = (newPage) => {
     axios
-      .post("https://resume-architech-flask.onrender.com/setuserinfo", {
+      .post("https://7c906c947c74.ngrok.app/setuserinfo", {
         ...formInputs,
         username: window.localStorage.getItem("username"),
       })

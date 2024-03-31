@@ -12,7 +12,7 @@ export default function form3() {
 
   useEffect(() => {
     axios
-      .get("https://resume-architech-flask.onrender.com/getuser", {
+      .get("https://7c906c947c74.ngrok.app/getuser", {
         params: {
           username: window.localStorage.getItem("username"),
         },
@@ -36,7 +36,7 @@ export default function form3() {
     };
 
     axios
-      .post("https://resume-architech-flask.onrender.com/updateexperience", {
+      .post("https://7c906c947c74.ngrok.app/updateexperience", {
         username: window.localStorage.getItem("username"),
         experiences: { ...experiences, [experienceName]: newExperience },
       })
@@ -59,7 +59,7 @@ export default function form3() {
     let newExperiences = { ...experiences };
     delete newExperiences[experience];
     axios
-      .post("https://resume-architech-flask.onrender.com/updateexperience", {
+      .post("https://7c906c947c74.ngrok.app/updateexperience", {
         username: window.localStorage.getItem("username"),
         experiences: newExperiences,
       })

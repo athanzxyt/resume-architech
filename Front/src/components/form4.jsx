@@ -10,7 +10,7 @@ export default function form4(props) {
 
   useEffect(() => {
     axios
-      .get("https://resume-architech-flask.onrender.com/getuser", {
+      .get("https://7c906c947c74.ngrok.app/getuser", {
         params: {
           username: window.localStorage.getItem("username"),
         },
@@ -32,7 +32,7 @@ export default function form4(props) {
     };
 
     axios
-      .post("https://resume-architech-flask.onrender.com/updateprojects", {
+      .post("https://7c906c947c74.ngrok.app/updateprojects", {
         username: window.localStorage.getItem("username"),
         repos: { ...projects, [projectName]: newProject },
       })
@@ -52,7 +52,7 @@ export default function form4(props) {
     let newProjects = { ...projects };
     delete newProjects[project];
     axios
-      .post("https://resume-architech-flask.onrender.com/updateprojects", {
+      .post("https://7c906c947c74.ngrok.app/updateprojects", {
         username: window.localStorage.getItem("username"),
         repos: newProjects,
       })
@@ -68,7 +68,7 @@ export default function form4(props) {
   const scrapeGithub = () => {
     setGhLoading(true);
     axios
-      .post("https://resume-architech-flask.onrender.com/scrapegithub", {
+      .post("https://7c906c947c74.ngrok.app/scrapegithub", {
         username: window.localStorage.getItem("username"),
         github: props.inputs.github,
       })

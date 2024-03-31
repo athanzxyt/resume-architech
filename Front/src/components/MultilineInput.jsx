@@ -20,7 +20,7 @@ function MultilineInput() {
     if (loading) return;
     setLoading(true);
     axios
-      .post("https://resume-architech-flask.onrender.com/getresume", {
+      .post("https://7c906c947c74.ngrok.app/getresume", {
         username: window.localStorage.getItem("username"),
         job: textValue,
       })
@@ -28,7 +28,7 @@ function MultilineInput() {
         setLoading(false);
         console.log(res.data);
         setDownloadPath(
-          `https://resume-architech-flask.onrender.com/download/${window.localStorage.getItem(
+          `https://7c906c947c74.ngrok.app/download/${window.localStorage.getItem(
             "username"
           )}`
         );
@@ -87,7 +87,7 @@ function MultilineInput() {
           {downloadPath && (
             <>
               <iframe
-                // src={"https://resume-architech-flask.onrender.com/download/tim"}
+                // src={"https://7c906c947c74.ngrok.app/download/tim"}
                 src={downloadPath}
                 frameborder="0"
                 style={{ width: "100%", height: "100%" }}
