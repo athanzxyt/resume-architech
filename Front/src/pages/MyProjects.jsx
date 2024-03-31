@@ -80,38 +80,6 @@ export default function MyProjects() {
 
   return (
     <div className="grid grid-cols-2 gap-4 p-8">
-<<<<<<< Updated upstream
-        <div className="flex flex-col p-8">
-            <h1 className='text-3xl font-bold pb-4'>Add Additional Projects</h1>
-            <input
-                className='border-2 rounded-md p-2 mb-4'
-                type="text"
-                placeholder="Project Name"
-                value={projectName}
-                onChange={(e) => setProjectName(e.target.value)}
-            />
-            <textarea
-                className='h-64 border-2 rounded-md p-2 mb-4'
-                placeholder="Project Description"
-                value={projectDescription}
-                onChange={(e) => setProjectDescription(e.target.value)}
-            />
-            <button className='w-1/2 p-2 border-2 rounded-md mb-8' onClick={addProject}>Add</button>
-            <button className='w-1/2 p-2 border-2 rounded-md bg-black text-white' onClick={generate}>Generate Bullets</button>
-        </div>
-        <div className="flex justify-top items-top bg-gradient-to-r from-blue-100 to-green-200 rounded-xl border-4 border-slate-500">
-            <div className="flex justify-top w-full">
-                <ul className="w-full p-8">
-                    <h1 className='text-3xl font-bold pb-4'>Current Projects</h1>
-                    {Object.values(projects).map((project, index) => (
-                        <li className="flex justify-between w-full border-2 bg-white rounded-md p-2 m-2 border-slate-500">
-                            <span>{index + 1}: {project.name}</span>
-                            <span>Delete</span>
-                        </li>
-                    ))}
-                </ul>
-            </div>
-=======
       <div className="flex flex-col p-8">
         <h1 className="text-3xl font-bold pb-4">Add Additional Projects</h1>
         <input
@@ -140,12 +108,12 @@ export default function MyProjects() {
           Generate Bullets
         </button>
       </div>
-      <div className="flex justify-center items-center">
-        <div className="flex justify-center w-full">
+      <div className="flex justify-top items-top bg-gradient-to-r from-blue-100 to-green-200 rounded-xl border-4 border-slate-500">
+        <div className="flex justify-top w-full">
           <ul className="w-full p-8">
             <h1 className="text-3xl font-bold pb-4">Current Projects</h1>
             {Object.values(projects).map((project, index) => (
-              <li className="flex justify-between w-full border-2 rounded-md p-2 m-2">
+              <li className="flex justify-between w-full border-2 bg-white rounded-md p-2 m-2 border-slate-500">
                 <span>
                   {index + 1}: {project.name}
                 </span>
@@ -160,7 +128,6 @@ export default function MyProjects() {
               </li>
             ))}
           </ul>
->>>>>>> Stashed changes
         </div>
       </div>
     </div>
