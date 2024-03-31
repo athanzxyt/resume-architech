@@ -6,7 +6,6 @@ import PersonalInfo from "./pages/PersonalInfo.jsx";
 import FinalizeResume from "./pages/FinalizeResume.jsx";
 import Login from "./pages/Login.jsx";
 import Logout from "./pages/Logout.jsx";
-import MyProjects from "./pages/MyProjects.jsx";
 import ProjectBullets from "./pages/ProjectBullets.jsx";
 import ExperienceBullets from "./pages/ExperienceBullets.jsx";
 import Bullets from "./pages/Bullets.jsx";
@@ -25,14 +24,6 @@ export default function App() {
           element={
             <PR>
               <PersonalInfo />
-            </PR>
-          }
-        />
-        <Route
-          path="/myprojects"
-          element={
-            <PR>
-              <MyProjects />
             </PR>
           }
         />

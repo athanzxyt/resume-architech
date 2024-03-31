@@ -16,7 +16,7 @@ const Navbar = () => {
           </div>
           {/* Account Button on the far right */}
           <div>
-            <a href="dashboard" className="py-2 px-3 border-slate-400 rounded-md">
+            <a href="login" className="py-2 px-3 border-slate-400 rounded-md">
               Account
             </a>
           </div>

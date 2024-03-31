@@ -64,6 +64,10 @@ export default function form4(props) {
       });
   };
 
+  const sendGHUser = () => {
+
+  };
+
   const generate = () => {
     axios
       .post("http://localhost:8000/generatebullets", {
@@ -91,6 +95,12 @@ export default function form4(props) {
             value={props.inputs.github}
             onChange={(e) => props.setInputs("github", e.target.value)}
           />
+          <button
+            className="w-1/2 p-2 border-2 rounded-md mb-8"
+            onClick={addProject} // NEED TO CHANGE THIS TO A DIFF FUNCTION
+          > Scrape GitHub
+          </button>
+
           <h1 className="text-3xl font-bold pb-4">Add Additional Projects</h1>
           <input
             className="border-2 rounded-md p-2 mb-4"
@@ -112,7 +122,7 @@ export default function form4(props) {
             Add
           </button>
           <button
-            className="w-1/2 p-2 border-2 rounded-md bg-black text-white"
+            className="w-1/2 p-2 border-2 rounded-md"
             onClick={generate}
           >
             Generate Bullets

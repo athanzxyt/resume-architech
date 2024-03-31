@@ -54,7 +54,7 @@ function Form() {
       })
       .then((res) => {
         setLoading(false);
-        window.location.href = "/myprojects";
+        window.location.href = "/apply";
       })
       .catch((err) => {
         console.log(err);
@@ -141,10 +141,10 @@ function Form() {
           {page === 0 ? (
             <button
               onClick={() => {
-                window.location.href = "/"; // Go home
+                window.location.href='/login'; // Go Login
               }}
             >
-              Home
+              Back
             </button>
           ) : (
             <button
