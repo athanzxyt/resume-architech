@@ -8,7 +8,6 @@ from docx.enum.text import WD_PARAGRAPH_ALIGNMENT
 from docx.enum.table import WD_ALIGN_VERTICAL
 import convertapi
 
-from docx2pdf import convert
 
 def set_cell_border(cell, **kwargs):
     """

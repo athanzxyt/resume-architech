@@ -13,6 +13,10 @@ tensorflow
 spacy
 python-docx
 docx2pdf
+scikit-learn
+convertapi
+tf-keras
+torch
 
 
 
