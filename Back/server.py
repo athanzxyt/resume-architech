@@ -142,7 +142,7 @@ def getresume():
         if 'bullets' not in experience:
             continue
         for bullet in experience['bullets']:
-            data.append((bullet, experience['name'], experience['dates'], experience['company'], experience['location']))
+            data.append((bullet, experience['name'], experience.get('dates',""), experience.get('company',""), experience.get('location',"")))
     data = pd.DataFrame(data, columns=["bullet", "title", "date", "company", "location"])
     df_exp = get_similiarity(job_desc, embed_data(data))
     df_exp = get_keyword_count(job_desc, df_exp)

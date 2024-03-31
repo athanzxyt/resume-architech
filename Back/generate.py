@@ -130,41 +130,52 @@ def add_experience(doc,
                    bullets: list = []):
     
     # Add a table with one row and two columns
-    table = doc.add_table(rows=2, cols=2)
+    p = doc.add_paragraph()
+    p.paragraph_format.space_before = Pt(0)
+    p.paragraph_format.space_after = Pt(0)
+    run = p.add_run(f'{title} | {dates}')
+    run.bold = True
+
+    p = doc.add_paragraph()
+    p.paragraph_format.space_before = Pt(0)
+    p.paragraph_format.space_after = Pt(0)
+    run = p.add_run(f'{company} @ {location}')
+
+    # table = doc.add_table(rows=2, cols=2)
     
-    for (row, side, text) in [
-        (0, 0, title),
-        (1, 0, company),
-        (0, 1, dates),
-        (1, 1, location)
-    ]:
-        cell = table.cell(row, side)
-        set_cell_border(cell, bottom={"sz": 0, "val": "nil", "color": "FFFFFF"})
-        set_cell_margins(cell, top=30, bottom=30, left=30, right=30)
-        cell.text = text
-        cell.vertical_alignment = WD_ALIGN_VERTICAL.BOTTOM
+    # for (row, side, text) in [
+    #     (0, 0, title),
+    #     (1, 0, company),
+    #     (0, 1, dates),
+    #     (1, 1, location)
+    # ]:
+    #     cell = table.cell(row, side)
+    #     set_cell_border(cell, bottom={"sz": 0, "val": "nil", "color": "FFFFFF"})
+    #     set_cell_margins(cell, top=30, bottom=30, left=30, right=30)
+    #     cell.text = text
+    #     cell.vertical_alignment = WD_ALIGN_VERTICAL.BOTTOM
         
 
-        paragraph = cell.paragraphs[0]
-        if (side == 0): paragraph.alignment = WD_PARAGRAPH_ALIGNMENT.LEFT
-        else: paragraph.alignment = WD_PARAGRAPH_ALIGNMENT.RIGHT
+    #     paragraph = cell.paragraphs[0]
+    #     if (side == 0): paragraph.alignment = WD_PARAGRAPH_ALIGNMENT.LEFT
+    #     else: paragraph.alignment = WD_PARAGRAPH_ALIGNMENT.RIGHT
 
-        if (row == 0 and side == 0): paragraph.runs[0].bold = True
-        if (row == 1 and side == 0): paragraph.runs[0].italic = True
+    #     if (row == 0 and side == 0): paragraph.runs[0].bold = True
+    #     if (row == 1 and side == 0): paragraph.runs[0].italic = True
 
-        # Set the height for the row
-        row = table.rows[row]
-        tr = row._tr
-        trPr = tr.get_or_add_trPr()
-        trHeight = OxmlElement('w:trHeight')
-        trHeight.set(qn('w:val'), str(Pt(50)))  # Set the row height to 25 points
-        trHeight.set(qn('w:hRule'), "atLeast")  # Use "atLeast" or "exact" for fixed height
-        trPr.append(trHeight)
+    #     # Set the height for the row
+    #     row = table.rows[row]
+    #     tr = row._tr
+    #     trPr = tr.get_or_add_trPr()
+    #     trHeight = OxmlElement('w:trHeight')
+    #     trHeight.set(qn('w:val'), str(Pt(50)))  # Set the row height to 25 points
+    #     trHeight.set(qn('w:hRule'), "atLeast")  # Use "atLeast" or "exact" for fixed height
+    #     trPr.append(trHeight)
 
     # Adjust the table to span the width of the document
-    table.autofit = False
-    table.columns[0].width = Inches(3.75)
-    table.columns[1].width = Inches(3.75)
+    # table.autofit = False
+    # table.columns[0].width = Inches(3.75)
+    # table.columns[1].width = Inches(3.75)
 
 
     for bullet in bullets:
@@ -262,7 +273,7 @@ def make_resume(df_exp, df_proj, user):
     add_section_title(doc, 'Education')
     add_education(doc, user['school'], user['major'], user['gpa'], user['grad_year'])
 
-    exp, proj = rank(df_exp, df_proj, budget=50)
+    exp, proj = rank(df_exp, df_proj, budget=40)
 
     add_section_title(doc, 'Experience')
     for (title, date, company, location) in exp:

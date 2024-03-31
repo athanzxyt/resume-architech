@@ -43,7 +43,7 @@ function MultilineInput() {
       <h1 className="display-2 my-5">Apply</h1>
       <Row>
         <Col>
-          <div className="border-2 border-[#55c1bd] p-2.5 mb-2 text-center w-full box-border">
+          <div className="border-2 bg-[#55c1bd] p-2.5 mb-2 text-center w-full box-border text-white font-bold text-lg">
             Enter job description:
           </div>
           <textarea
@@ -84,11 +84,11 @@ function MultilineInput() {
           </div>
         </Col>
         <Col>
-          {true && (
+          {downloadPath && (
             <>
               <iframe
-                src={"http://localhost:8000/download/tim"}
-                // src={downloadPath}
+                // src={"http://localhost:8000/download/tim"}
+                src={downloadPath}
                 frameborder="0"
                 style={{ width: "100%", height: "100%" }}
               ></iframe>
