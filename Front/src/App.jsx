@@ -42,14 +42,6 @@ export default function App() {
             </PR>
           }
         />
-        <Route
-          path="/experiencebullets"
-          element={
-            <PR>
-              <ExperienceBullets />
-            </PR>
-          }
-        />
         <Route path="/finalize-resume" element={<FinalizeResume />} />
         <Route
           path="apply"
