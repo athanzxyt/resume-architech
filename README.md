@@ -5,6 +5,10 @@ ArchiTech and are excited to use these technologies in future projects!
 ## Check it out!
 [resumearchi.tech](https://resume-architech.onrender.com/)
 
+![Home Screen](/readmeimg/HomeScreen.png)
+![Projects](/readmeimg/projects.png)
+![resume](/readmeimg/resume.png)
+
 Run Backend:
 ```
 python ./Back/server.py
