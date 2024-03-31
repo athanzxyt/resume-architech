@@ -14,9 +14,13 @@ function Form() {
     address: "",
     phone: "",
     email: "",
-    education: "",
+    school: "",
+    grad_year: "",
+    major: "",
+    gpa: "",
     skills: "",
     github: "",
+
   });
   const [loading, setLoading] = useState(false);
   const updateFormInputs = (key, value) => {

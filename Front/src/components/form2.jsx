@@ -6,9 +6,27 @@ function form2(props) {
     <div className="sign-up-container">
       <input
         type="text"
-        placeholder="Education History"
-        value={props.inputs.education}
-        onChange={(e) => props.setInputs("education", e.target.value)}
+        placeholder="School"
+        value={props.inputs.school}
+        onChange={(e) => props.setInputs("school", e.target.value)}
+      />
+      <input
+        type="text"
+        placeholder="Graduation Year"
+        value={props.inputs.grad_year}
+        onChange={(e) => props.setInputs("grad_year", e.target.value)}
+      />
+      <input
+        type="text"
+        placeholder="Major"
+        value={props.inputs.major}
+        onChange={(e) => props.setInputs("major", e.target.value)}
+      />
+      <input
+        type="text"
+        placeholder="GPA"
+        value={props.inputs.gpa}
+        onChange={(e) => props.setInputs("gpa", e.target.value)}
       />
     </div>
   );

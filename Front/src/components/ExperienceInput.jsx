@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-export default function MyProjects() {
-  let [projects, setProjects] = useState([]);
-  let [projectName, setProjectName] = useState("");
-  let [projectDescription, setProjectDescription] = useState("");
+export default function ExperienceInput() {
+  let [Experiences, setExperiences] = useState([]);
+  let [ExperienceName, setExperienceName] = useState("");
+  let [ExperienceDescription, setExperienceDescription] = useState("");
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/getprojects", {
+      .get("http://localhost:8000/getExperiences", {
         params: {
           username: window.localStorage.getItem("username"),
         },
       })
       .then((res) => {
-        setProjects(res.data.repos);
+        setExperiences(res.data.repos);
         console.log(res.data.repos);
       })
       .catch((err) => {
@@ -22,39 +22,39 @@ export default function MyProjects() {
       });
   }, []);
 
-  const addProject = () => {
-    let newProject = {
-      name: projectName,
-      readme: projectDescription,
+  const addExperience = () => {
+    let newExperience = {
+      name: ExperienceName,
+      readme: ExperienceDescription,
       selected: true,
     };
 
     axios
-      .post("http://localhost:8000/updateprojects", {
+      .post("http://localhost:8000/updateExperiences", {
         username: window.localStorage.getItem("username"),
-        repos: { ...projects, [projectName]: newProject },
+        repos: { ...Experiences, [ExperienceName]: newExperience },
       })
       .then((res) => {
         console.log(res.data);
-        setProjects(res.data.repos);
-        setProjectName("");
-        setProjectDescription("");
+        setExperiences(res.data.repos);
+        setExperienceName("");
+        setExperienceDescription("");
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
-// delteProject function
-    const deleteProject = (project) => {
+// delteExperience function
+    const deleteExperience = (Experience) => {
         axios
-        .post("http://localhost:8000/deleteproject", {
+        .post("http://localhost:8000/deleteExperience", {
             username: window.localStorage.getItem("username"),
-            project: project,
+            Experience: Experience,
         })
         .then((res) => {
             console.log(res.data);
-            setProjects(res.data.repos);
+            setExperiences(res.data.repos);
         })
         .catch((err) => {
             console.log(err);
@@ -65,11 +65,11 @@ export default function MyProjects() {
     axios
       .post("http://localhost:8000/generatebullets", {
         username: window.localStorage.getItem("username"),
-        repos: projects,
+        repos: Experiences,
       })
       .then((res) => {
         console.log(res.data);
-        window.location.href = "/projectbullets";
+        window.location.href = "/Experiencebullets";
       })
       .catch((err) => {
         console.log(err);
@@ -79,30 +79,30 @@ export default function MyProjects() {
   return (
     <div className="grid grid-cols-2 gap-4 p-8">
         <div className="flex flex-col p-8">
-            <h1 className='text-3xl font-bold pb-4'>Add Additional Projects</h1>
+            <h1 className='text-3xl font-bold pb-4'>Add Experiences</h1>
             <input
                 className='border-2 rounded-md p-2 mb-4'
                 type="text"
-                placeholder="Project Name"
-                value={projectName}
-                onChange={(e) => setProjectName(e.target.value)}
+                placeholder="Experience Name"
+                value={ExperienceName}
+                onChange={(e) => setExperienceName(e.target.value)}
             />
             <textarea
                 className='h-64 border-2 rounded-md p-2 mb-4'
-                placeholder="Project Description"
-                value={projectDescription}
-                onChange={(e) => setProjectDescription(e.target.value)}
+                placeholder="Experience Description"
+                value={ExperienceDescription}
+                onChange={(e) => setExperienceDescription(e.target.value)}
             />
-            <button className='w-1/2 p-2 border-2 rounded-md mb-8' onClick={addProject}>Add</button>
+            <button className='w-1/2 p-2 border-2 rounded-md mb-8' onClick={addExperience}>Add</button>
             <button className='w-1/2 p-2 border-2 rounded-md bg-black text-white' onClick={generate}>Generate Bullets</button>
         </div>
         <div className="flex justify-top items-top bg-gradient-to-r from-blue-100 to-green-200 rounded-xl border-4 border-slate-500">
             <div className="flex justify-top w-full">
                 <ul className="w-full p-8">
-                    <h1 className='text-3xl font-bold pb-4'>Current Projects</h1>
-                    {Object.values(projects).map((project, index) => (
-                        <li className="flex justify-between w-full border-2 bg-white rounded-md p-2 m-2 border-slate-500">
-                            <span>{index + 1}: {project.name}</span>
+                    <h1 className='text-3xl font-bold pb-4'>Current Experiences</h1>
+                    {Object.values(Experiences).map((Experience, index) => (
+                        <li className="flex justify-between w-full border-2 border-slate-500 bg-white rounded-md p-2 m-2">
+                            <span>{index + 1}: {Experience.name}</span>
                             <span>Delete</span>
                         </li>
                     ))}
