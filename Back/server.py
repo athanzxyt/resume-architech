@@ -43,16 +43,27 @@ def setuserinfo():
     data = request.json
     existing_user = db.db.collection.find_one({"username": data['username']})
     if existing_user != None:
-        if existing_user.get("github") != data['github']:
-            repos = get_repos(data['github'])
-        else:
-            repos = existing_user['repos']
+        existing_user.pop('_id')
+        data.pop('_id')
+        print(existing_user.keys())
+        new_user = {**existing_user, **data}
+        print(new_user.keys())
+        db.db.collection.update_one({"username": data['username']}, {"$set":new_user})
+        return "updated"
+    else:
+        db.db.collection.insert_one({**data})
+        return "inserted"
+
+@app.route("/scrapegithub", methods=['post'])
+def scrapegithub():
+    data = request.json
+    existing_user = db.db.collection.find_one({"username": data['username']})
+    if existing_user != None:
+        repos = get_repos(data['github'])
         db.db.collection.update_one({"username": data['username']}, {"$set":{**data, "repos": repos}})
         return "updated"
     else:
-        repos = get_repos(data['github'])
-        db.db.collection.insert_one({**data, "repos": repos})
-        return "inserted"
+        return "no user found"
     
 @app.route("/updateprojects", methods=['post']) 
 def updateprojects():

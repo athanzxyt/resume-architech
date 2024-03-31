@@ -8,6 +8,8 @@ import Login from "./pages/Login.jsx";
 import Logout from "./pages/Logout.jsx";
 import MyProjects from "./pages/MyProjects.jsx";
 import ProjectBullets from "./pages/ProjectBullets.jsx";
+import ExperienceBullets from "./pages/ExperienceBullets.jsx";
+import Bullets from "./pages/Bullets.jsx";
 import Apply from "./pages/Apply.jsx";
 
 export default function App() {
@@ -35,10 +37,10 @@ export default function App() {
           }
         />
         <Route
-          path="/projectbullets"
+          path="/bullets"
           element={
             <PR>
-              <ProjectBullets />
+              <Bullets />
             </PR>
           }
         />
