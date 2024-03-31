@@ -1,9 +1,16 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { Document, Page, pdfjs } from "react-pdf";
 
 function MultilineInput() {
   const [textValue, setTextValue] = useState("");
   const [downloadPath, setDownloadPath] = useState("");
+
+  const [numPages, setNumPages] = useState(null);
+
+  const onDocumentLoadSuccess = ({ numPages }) => {
+    setNumPages(numPages);
+  };
 
   const handleChange = (event) => {
     setTextValue(event.target.value);
@@ -43,18 +50,22 @@ function MultilineInput() {
         padding: "70px",
       }}
     >
-      <div
-        style={{
-          border: "2px solid #55c1bd", // Blue border around the text
-          padding: "10px", // Padding inside the border
-          marginBottom: "20px", // Margin below the text box to separate from the textarea
-          textAlign: "center", // Center-align the text
-          width: "100%", // Take full width of its container
-          boxSizing: "border-box", // Include padding and border in the element's dimensions
-        }}
-      >
+      <div className="border-2 border-[#55c1bd] p-2.5 mb-5 text-center w-full box-border">
         Enter job description:
       </div>
+      <div>
+        <Document
+            file={`./athan_resume.pdf`}
+            onLoadSuccess={onDocumentLoadSuccess}
+        >
+            {Array.from(
+            new Array(numPages),
+            (el, index) => (
+                <Page key={`page_${index + 1}`} pageNumber={index + 1} />
+            ),
+            )}
+        </Document>
+        </div>
       <textarea
         value={textValue}
         onChange={handleChange}
