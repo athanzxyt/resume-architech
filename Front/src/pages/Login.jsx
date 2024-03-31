@@ -39,15 +39,19 @@ function Login() {
 
   return (
     <div className="sign-up-container">
-      <h1>Login</h1>
+      <div className="header text-4xl sm:text-6xl lg:text-7xl text-center tracking-wide lg:mt-40">
+      Login
+      </div>
       <input
         type="text"
         placeholder="Input Unique Username"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
       />
-      <button onClick={signup}>SignUp</button>
-      <button onClick={login}>Login</button>
+      <div className="footer">
+        <button onClick={signup}>Create Account</button>
+        <button onClick={login}>Login</button>
+      </div>
     </div>
   );
 }
