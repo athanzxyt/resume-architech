@@ -44,7 +44,8 @@ def setuserinfo():
     existing_user = db.db.collection.find_one({"username": data['username']})
     if existing_user != None:
         existing_user.pop('_id')
-        data.pop('_id')
+        if "_id" in data:
+          data.pop('_id')
         print(existing_user.keys())
         new_user = {**existing_user, **data}
         print(new_user.keys())

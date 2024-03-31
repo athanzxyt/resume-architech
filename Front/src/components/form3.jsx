@@ -6,6 +6,8 @@ export default function form3() {
   let [experiences, setExperiences] = useState([]);
   let [experienceName, setExperienceName] = useState("");
   let [experienceDescription, setExperienceDescription] = useState("");
+  let [experienceCompany, setExperienceCompany] = useState("");
+  let [experienceDates, setExperienceDates] = useState("");
 
   useEffect(() => {
     axios
@@ -26,6 +28,8 @@ export default function form3() {
     let newExperience = {
       name: experienceName,
       readme: experienceDescription,
+      company: experienceCompany,
+      dates: experienceDates,
       selected: true,
     };
 
@@ -39,6 +43,8 @@ export default function form3() {
         setExperiences(res.data.experiences ?? {});
         setExperienceName("");
         setExperienceDescription("");
+        setExperienceCompany("");
+        setExperienceDates("");
       })
       .catch((err) => {
         console.log(err);
@@ -74,6 +80,20 @@ export default function form3() {
             placeholder="Experience Name"
             value={experienceName}
             onChange={(e) => setExperienceName(e.target.value)}
+          />
+          <input
+            className="w-full border-2 rounded-md p-2 mb-4"
+            type="text"
+            placeholder="Experience Company"
+            value={experienceCompany}
+            onChange={(e) => setExperienceCompany(e.target.value)}
+          />
+          <input
+            className="w-full border-2 rounded-md p-2 mb-4"
+            type="text"
+            placeholder="Experience Dates"
+            value={experienceDates}
+            onChange={(e) => setExperienceDates(e.target.value)}
           />
           <textarea
             className="h-64 border-2 rounded-md p-2 mb-4"

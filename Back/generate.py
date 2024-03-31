@@ -179,7 +179,7 @@ def add_project(doc, title, bullets):
     run = p.add_run(title)
     run.bold = True
     for bullet in bullets:
-        p = doc.add_paragraph(f"  {bullet}", style='List Bullet')
+        p = doc.add_paragraph(f"  {bullet[2:]}", style='List Bullet')
         p.paragraph_format.left_indent = Pt(25)
         p.paragraph_format.space_before = Pt(0)
         p.paragraph_format.space_after = Pt(0)
