@@ -6,7 +6,7 @@ import json
 
 
 
-async def get_bullet_points(project_str, project_name=None, repos=None):
+async def get_bullet_points(project_str, project_name=None, repos=None, prompt="github"):
   # load env
   load_dotenv()
   client = AsyncOpenAI(
@@ -14,15 +14,26 @@ async def get_bullet_points(project_str, project_name=None, repos=None):
       api_key=os.getenv("OPENAI_API_KEY"),
   )
 
-  chat_completion = await client.chat.completions.create(
-      messages=[
-          {
-              "role": "user",
-              "content": f'Here is a GitHub project, please write me 5 resume bullet points using the STAR method, keeping each bullet point to one line: {project_str}',
-          }
-      ],
-      model="gpt-3.5-turbo",
-  )
+  if prompt == "github":
+    chat_completion = await client.chat.completions.create(
+        messages=[
+            {
+                "role": "user",
+                "content": f'Here is a GitHub project, please write me 5 resume bullet points using the STAR method, keeping each bullet point to one line: {project_str}',
+            }
+        ],
+        model="gpt-3.5-turbo",
+    )
+  else:
+    chat_completion = await client.chat.completions.create(
+        messages=[
+            {
+                "role": "user",
+                "content": f'Here is a decription of one of my work experiences, please write me 5 resume bullet points using the STAR method, keeping each bullet point to one line: {project_str}',
+            }
+        ],
+        model="gpt-3.5-turbo",
+    )
 
   if repos != None and project_name != None:
     repos[project_name]['bullets'] = chat_completion.choices[0].message.content.split("\n")
@@ -30,18 +41,18 @@ async def get_bullet_points(project_str, project_name=None, repos=None):
   print(chat_completion.choices[0].message.content)
   return chat_completion.choices[0].message.content
 
-async def get_multiple_bullets_async(repos):
+async def get_multiple_bullets_async(repos, prompt):
   tasks = []
   for repo_name in repos:
     repo = repos[repo_name]
     if len(repo.get('bullets',[])) != 0:
       continue
     print(repo_name)
-    tasks.append(get_bullet_points(json.dumps(repo, sort_keys=True, indent=4), repo_name, repos))
+    tasks.append(get_bullet_points(json.dumps(repo, sort_keys=True, indent=4), repo_name, repos, prompt))
   await asyncio.gather(*tasks)
 
-def get_multiple_bullets(repos):
-  asyncio.run(get_multiple_bullets_async(repos))
+def get_multiple_bullets(repos, prompt="github"):
+  asyncio.run(get_multiple_bullets_async(repos, prompt))
   # print(repos)
   return repos
   

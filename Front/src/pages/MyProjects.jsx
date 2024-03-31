@@ -8,7 +8,7 @@ export default function MyProjects() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/getprojects", {
+      .get("http://localhost:8000/getuser", {
         params: {
           username: window.localStorage.getItem("username"),
         },

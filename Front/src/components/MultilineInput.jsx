@@ -3,6 +3,7 @@ import axios from "axios";
 
 function MultilineInput() {
   const [textValue, setTextValue] = useState("");
+  const [downloadPath, setDownloadPath] = useState("");
 
   const handleChange = (event) => {
     setTextValue(event.target.value);
@@ -16,6 +17,11 @@ function MultilineInput() {
       })
       .then((res) => {
         console.log(res.data);
+        setDownloadPath(
+          `http://localhost:8000/download/${window.localStorage.getItem(
+            "username"
+          )}`
+        );
       })
       .catch((err) => {
         console.log(err);
@@ -78,6 +84,23 @@ function MultilineInput() {
       >
         Submit
       </button>
+      {downloadPath && (
+        <a href={downloadPath} target="blank">
+          <button
+            onClick={handleSubmit}
+            style={{
+              padding: "10px 20px",
+              border: "1px solid #d0d0d0",
+              backgroundColor: "#f0f0f0",
+              borderRadius: "5px",
+              cursor: "pointer",
+              transition: "background-color 0.3s",
+            }}
+          >
+            Download
+          </button>
+        </a>
+      )}
     </div>
   );
 }
