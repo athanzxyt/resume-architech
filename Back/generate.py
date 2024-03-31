@@ -162,8 +162,8 @@ def add_experience(doc,
 
     # Adjust the table to span the width of the document
     table.autofit = False
-    table.columns[0].width = Inches(4)
-    table.columns[1].width = Inches(4)
+    table.columns[0].width = Inches(3.5)
+    table.columns[1].width = Inches(3.5)
 
 
     for bullet in bullets:
@@ -210,10 +210,10 @@ def rank(df_exp, df_proj, budget = 30):
 
     exp = {}
     for row in selected_exp:
-        if row['title'] in exp:
-            exp[row['title']].append(row['bullet'])
+        if (row['title'], row['date'], row['company'], row['location']) in exp:
+            exp[(row['title'], row['date'], row['company'], row['location'])].append(row['bullet'])
         else:
-            exp[row['title']] = [row['bullet']]
+            exp[(row['title'], row['date'], row['company'], row['location'])] = [row['bullet']]
 
     proj = {}
     for row in selected_proj:
@@ -229,27 +229,24 @@ def make_resume(df_exp, df_proj, user):
 
     section = doc.sections[0]
 
-    section.top_margin = Inches(0.25)
-    section.bottom_margin = Inches(0.25)
-    section.left_margin = Inches(0.25)
-    section.right_margin = Inches(0.25)
+    section.top_margin = Inches(0.5)
+    section.bottom_margin = Inches(0.5)
+    section.left_margin = Inches(0.5)
+    section.right_margin = Inches(0.5)
 
     add_header(doc, f"{user['first']} {user['last']}", f"{user['address']}", f"{user['email']}", f"{user['phone']}")
 
     add_section_title(doc, 'Education')
-    add_education(doc, 'University of Illinois Urbana-Champaign', 'Bachelor of Science', 'Computer Science', 'May 2020')
+    add_education(doc, user['school'], user['major'], user['gpa'], user['grad_year'])
 
-    exp, proj = rank(df_exp, df_proj)
+    exp, proj = rank(df_exp, df_proj, budget=40)
 
-    # add_section_title(doc, 'Experience')
-    # for row in exp:
-        # add_experience(doc, row['title'], row['company'], row['dates'], bullets=row['bullets'])
+    add_section_title(doc, 'Experience')
+    for (title, date, company, location) in exp:
+        add_experience(doc, title, company, date, location, proj[(title, date, company, location)])
 
     add_section_title(doc, 'Projects')
     for row in proj:
-        # print(f'Adding project: {row}')
-        # for b in proj[row]:
-        #     print(f'B: {b[3:]}')
         add_project(doc, row, proj[row])
 
     filename = f'./pdfs/{user["username"]}_resume'
