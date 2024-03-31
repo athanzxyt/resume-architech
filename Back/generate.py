@@ -222,7 +222,7 @@ def rank(df_exp, df_proj, budget = 30):
 
     return exp, proj
 
-def make_resume(df_exp, df_proj, username):
+def make_resume(df_exp, df_proj, user):
     doc = Document()
 
     section = doc.sections[0]
@@ -232,7 +232,7 @@ def make_resume(df_exp, df_proj, username):
     section.left_margin = Inches(0.25)
     section.right_margin = Inches(0.25)
 
-    add_header(doc, 'John Doe', '1234 Elm St, Springfield, IL 62701', 'asdf@gmail.com', '123-456-7890')
+    add_header(doc, f"{user['first']} {user['last']}", f"{user['address']}", f"{user['email']}", f"{user['phone']}")
 
     add_section_title(doc, 'Education')
     add_education(doc, 'University of Illinois Urbana-Champaign', 'Bachelor of Science', 'Computer Science', 'May 2020')
@@ -248,8 +248,8 @@ def make_resume(df_exp, df_proj, username):
         # print(f'Adding project: {row}')
         # for b in proj[row]:
         #     print(f'B: {b[3:]}')
-        add_project(doc, row, proj[row][3:])
+        add_project(doc, row, proj[row])
 
-    filename = f'./pdfs/{username}_resume.docx'
+    filename = f'./pdfs/{user["username"]}_resume.docx'
     doc.save(filename)
     return filename
