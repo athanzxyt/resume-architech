@@ -45,7 +45,14 @@ export default function App() {
         />
         <Route path="/finalize-resume" element={<FinalizeResume />} />
         <Route path="/experience" element={<Experience />} />
-        <Route path="apply" element={<Apply />} />
+        <Route
+          path="apply"
+          element={
+            <PR>
+              <Apply />
+            </PR>
+          }
+        />
         <Route path="*" element={<NoPage />} />
       </Routes>
     </div>

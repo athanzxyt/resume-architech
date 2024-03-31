@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, send_file, make_response
 from flask import request
 from flask_cors import CORS
 
@@ -8,11 +8,14 @@ CORS(app)
 import db
 import json
 import pandas as pd
+import os
 from bson.json_util import dumps, loads 
 
 from scraper import get_repos
 from gpt import get_multiple_bullets
-from vectorize import sort_by_similarity, embed_data
+from vectorize import get_similiarity, embed_data
+from keyword_parse import get_keyword_count
+from generate import make_resume
 
 @app.route("/")
 def home():
@@ -88,20 +91,38 @@ def viewall():
     json_data = dumps(list_cur, indent = 2)  
     return json_data
 
+@app.route("/getresume", methods=['post'])
+def getresume():
+    username = request.json['username']
+    job_desc = request.json['job']
+    existing_user = db.db.collection.find_one({"username": username})
 
-@app.route("/sortbullets")
-def getmostsimilar():
+    # Get Projects DF
     data = []
-    with open("dummydata.json", "r") as f:
-        json_data = json.load(f)
-        for project in json_data:
-            for bullet in json_data[project]['bullets']:
-                data.append((bullet, json_data[project]['title']))
+    for repo_name in existing_user['repos']:
+        repo = existing_user['repos'][repo_name]
+        if 'bullets' not in repo:
+            continue
+        for bullet in repo['bullets']:
+            data.append((bullet, repo_name))
     data = pd.DataFrame(data, columns=["bullet", "title"])
+    df_proj = get_similiarity(job_desc, embed_data(data))
+    df_proj = get_keyword_count(job_desc, df_proj)
 
-    job_desc = open("dummyjob.txt", "r").read()
+    # Get Experience DF
+    df_exp = df_proj.copy()
+    filename = make_resume(df_proj, df_exp, username)
 
-    return sort_by_similarity(job_desc, embed_data(data)).to_json()
+@app.route("/download/<string:username>", methods=['GET'])
+def return_pdf(username):
+    try:
+        file_path = f'./pdfs/{username}_resume.docx'
+        if os.path.isfile(file_path):
+            return send_file(file_path, as_attachment=True)
+        else:
+            return make_response(f"File '{username}' not found.", 404)
+    except Exception as e:
+        return make_response(f"Error: {str(e)}", 500)
 
 if __name__ == '__main__':
     app.run(port=8000)

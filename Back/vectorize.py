@@ -62,7 +62,7 @@ def embed_data(df: pd.DataFrame) -> pd.DataFrame:
     df["embedding"] = df["bullet"].apply(lambda x: get_embeddings(x).numpy())
     return df
 
-def sort_by_similarity(job_desc: str, df: pd.DataFrame) -> pd.DataFrame:
+def get_similiarity(job_desc: str, df: pd.DataFrame) -> pd.DataFrame:
     """
     Sorts the DataFrame based on the similarity of the bullet points with the job description
 
@@ -81,7 +81,6 @@ def sort_by_similarity(job_desc: str, df: pd.DataFrame) -> pd.DataFrame:
     
     query_embedding = get_embeddings(job_desc).numpy()
     df['similarity'] = df["embedding"].apply(lambda x: cosine_similarity(query_embedding, x)[0][0])
-    df = df.sort_values(by='similarity', ascending=False)
     return df
 
 
