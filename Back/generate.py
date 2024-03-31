@@ -7,6 +7,8 @@ from docx.oxml.ns import qn
 from docx.enum.text import WD_PARAGRAPH_ALIGNMENT
 from docx.enum.table import WD_ALIGN_VERTICAL
 
+from docx2pdf import convert
+
 def set_cell_border(cell, **kwargs):
     """
     Set cell's border. This function is used to hide the table borders by setting them to zero size.
@@ -250,6 +252,7 @@ def make_resume(df_exp, df_proj, user):
         #     print(f'B: {b[3:]}')
         add_project(doc, row, proj[row])
 
-    filename = f'./pdfs/{user["username"]}_resume.docx'
-    doc.save(filename)
+    filename = f'./pdfs/{user["username"]}_resume'
+    doc.save(f'{filename}.docx')
+    convert(f'{filename}.docx', f'{filename}.pdf')
     return filename
