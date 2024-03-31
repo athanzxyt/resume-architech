@@ -24,13 +24,16 @@ export default function MyProjects() {
   }, []);
 
   const addProject = () => {
+    let newProject = {
+      name: projectName,
+      readme: projectDescription,
+      selected: true,
+    };
+
     axios
-      .post("http://localhost:8000/addproject", {
+      .post("http://localhost:8000/updateprojects", {
         username: window.localStorage.getItem("username"),
-        project: {
-          name: projectName,
-          readme: projectDescription,
-        },
+        repos: { ...projects, [projectName]: newProject },
       })
       .then((res) => {
         console.log(res.data);
@@ -47,6 +50,7 @@ export default function MyProjects() {
     axios
       .post("http://localhost:8000/generatebullets", {
         username: window.localStorage.getItem("username"),
+        repos: projects,
       })
       .then((res) => {
         console.log(res.data);

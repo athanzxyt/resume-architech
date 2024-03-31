@@ -8,6 +8,7 @@ import FinalizeResume from "./pages/FinalizeResume.jsx";
 import Login from "./pages/Login.jsx";
 import Logout from "./pages/Logout.jsx";
 import MyProjects from "./pages/MyProjects.jsx";
+import ProjectBullets from "./pages/ProjectBullets.jsx";
 
 export default function App() {
   let authenticated = localStorage.getItem("username") ? true : false;
@@ -30,6 +31,14 @@ export default function App() {
           element={
             <PR>
               <MyProjects />
+            </PR>
+          }
+        />
+        <Route
+          path="/projectbullets"
+          element={
+            <PR>
+              <ProjectBullets />
             </PR>
           }
         />
