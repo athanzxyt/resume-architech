@@ -11,6 +11,7 @@ import pandas as pd
 from bson.json_util import dumps, loads 
 
 from scraper import get_repos
+from gpt import get_bullet_points
 from vectorize import sort_by_similarity, embed_data
 
 @app.route("/")
@@ -50,20 +51,35 @@ def setuserinfo():
         db.db.collection.insert_one({**data, "repos": repos})
         return "inserted"
     
-@app.route("/addproject", methods=['post']) 
+@app.route("/updateprojects", methods=['post']) 
 def addproject():
     data = request.json
     existing_user = db.db.collection.find_one({"username": data['username']})
     if existing_user != None:
-        db.db.collection.update_one({"username": data['username']}, {"$set":{f"repos.{data['project']['name']}": data['project']}})
+        db.db.collection.update_one({"username": data['username']}, {"$set":{"repos": data['repos']}})
         existing_user = db.db.collection.find_one({"username": data['username']})
         return json.loads(dumps(existing_user))
     else:
         return "user not found"
 
-@app.route("/generatebullets")
+@app.route("/generatebullets", methods=['post'])
 def genbullets():
-    return "generating!!"
+    data = request.json
+    existing_user = db.db.collection.find_one({"username": data['username']})
+    if existing_user != None:
+        db.db.collection.update_one({"username": data['username']}, {"$set":{"repos": data['repos']}})
+        existing_user = db.db.collection.find_one({"username": data['username']})
+        repos = existing_user['repos']
+        for repo_name in repos:
+            repo = repos[repo_name]
+            bullets = get_bullet_points(json.dumps(repo, sort_keys=True, indent=4)).split("\n")
+            repos[repo_name]['bullets'] = bullets
+            break
+        db.db.collection.update_one({"username": data['username']}, {"$set":{"repos": repos}})
+        print(repo)
+        return repo
+    else:
+        return "user not found"
 
 @app.route("/clear")
 def clear():
