@@ -54,7 +54,7 @@ function Form() {
       })
       .then((res) => {
         setLoading(false);
-        window.location.href = "/apply";
+        window.location.href = "/bullets";
       })
       .catch((err) => {
         console.log(err);
@@ -156,7 +156,7 @@ function Form() {
             </button>
           )}
           {page === FormTitles.length - 1 ? (
-            <button onClick={submit}>Submit</button>
+            <button onClick={submit}>Generate Bullets</button>
           ) : (
             <button
               onClick={() => {
