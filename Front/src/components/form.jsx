@@ -31,7 +31,7 @@ function Form() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/getuser", {
+      .get("https://resume-architech-flask.onrender.com/getuser", {
         params: {
           username: window.localStorage.getItem("username"),
         },
@@ -53,7 +53,7 @@ function Form() {
     console.log(formInputs);
     setLoading(true);
     axios
-      .post("http://localhost:8000/generatebullets", {
+      .post("https://resume-architech-flask.onrender.com/generatebullets", {
         username: window.localStorage.getItem("username"),
       })
       .then((res) => {
@@ -68,7 +68,7 @@ function Form() {
 
   const changePage = (newPage) => {
     axios
-      .post("http://localhost:8000/setuserinfo", {
+      .post("https://resume-architech-flask.onrender.com/setuserinfo", {
         ...formInputs,
         username: window.localStorage.getItem("username"),
       })

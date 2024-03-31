@@ -9,7 +9,7 @@ export default function ExperienceBullets() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/getuser", {
+      .get("https://resume-architech-flask.onrender.com/getuser", {
         params: {
           username: window.localStorage.getItem("username"),
         },
@@ -25,7 +25,7 @@ export default function ExperienceBullets() {
 
   const saveBullets = () => {
     axios
-      .post("http://localhost:8000/updateexperiences", {
+      .post("https://resume-architech-flask.onrender.com/updateexperiences", {
         username: window.localStorage.getItem("username"),
         experiences: experiences,
       })

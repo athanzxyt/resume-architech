@@ -12,7 +12,7 @@ export default function form3() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/getuser", {
+      .get("https://resume-architech-flask.onrender.com/getuser", {
         params: {
           username: window.localStorage.getItem("username"),
         },
@@ -36,7 +36,7 @@ export default function form3() {
     };
 
     axios
-      .post("http://localhost:8000/updateexperience", {
+      .post("https://resume-architech-flask.onrender.com/updateexperience", {
         username: window.localStorage.getItem("username"),
         experiences: { ...experiences, [experienceName]: newExperience },
       })
@@ -59,7 +59,7 @@ export default function form3() {
     let newExperiences = { ...experiences };
     delete newExperiences[experience];
     axios
-      .post("http://localhost:8000/updateexperience", {
+      .post("https://resume-architech-flask.onrender.com/updateexperience", {
         username: window.localStorage.getItem("username"),
         experiences: newExperiences,
       })
