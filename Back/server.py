@@ -11,7 +11,7 @@ import pandas as pd
 from bson.json_util import dumps, loads 
 
 from scraper import get_repos
-from gpt import get_bullet_points
+from gpt import get_multiple_bullets
 from vectorize import sort_by_similarity, embed_data
 
 @app.route("/")
@@ -70,14 +70,9 @@ def genbullets():
         db.db.collection.update_one({"username": data['username']}, {"$set":{"repos": data['repos']}})
         existing_user = db.db.collection.find_one({"username": data['username']})
         repos = existing_user['repos']
-        for repo_name in repos:
-            repo = repos[repo_name]
-            bullets = get_bullet_points(json.dumps(repo, sort_keys=True, indent=4)).split("\n")
-            repos[repo_name]['bullets'] = bullets
-            break
+        repos = get_multiple_bullets(repos)
         db.db.collection.update_one({"username": data['username']}, {"$set":{"repos": repos}})
-        print(repo)
-        return repo
+        return repos
     else:
         return "user not found"
 
