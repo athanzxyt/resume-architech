@@ -37,19 +37,23 @@ function Form() {
         },
       })
       .then((res) => {
-        setFormInputs((current) => ({ ...current, ...res.data }));
+        let inputs = res.data;
+        delete inputs.username;
+        delete inputs._id;
+        delete inputs.repos;
+        delete inputs.experiences;
+        setFormInputs((current) => ({ ...current, ...inputs }));
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
 
-  const submit = () => {
+  const generate = () => {
     console.log(formInputs);
     setLoading(true);
     axios
-      .post("http://localhost:8000/setuserinfo", {
-        ...formInputs,
+      .post("http://localhost:8000/generatebullets", {
         username: window.localStorage.getItem("username"),
       })
       .then((res) => {
@@ -141,7 +145,7 @@ function Form() {
           {page === 0 ? (
             <button
               onClick={() => {
-                window.location.href='/login'; // Go Login
+                window.location.href = "/login"; // Go Login
               }}
             >
               Back
@@ -156,7 +160,7 @@ function Form() {
             </button>
           )}
           {page === FormTitles.length - 1 ? (
-            <button onClick={submit}>Generate Bullets</button>
+            <button onClick={generate}>Generate Bullets</button>
           ) : (
             <button
               onClick={() => {

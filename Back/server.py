@@ -93,28 +93,16 @@ def genbullets():
     data = request.json
     existing_user = db.db.collection.find_one({"username": data['username']})
     if existing_user != None:
-        db.db.collection.update_one({"username": data['username']}, {"$set":{"repos": data['repos']}})
-        existing_user = db.db.collection.find_one({"username": data['username']})
         repos = existing_user['repos']
         repos = get_multiple_bullets(repos)
-        db.db.collection.update_one({"username": data['username']}, {"$set":{"repos": repos}})
-        return repos
+        experiences = existing_user['experiences']
+        experiences = get_multiple_bullets(experiences, prompt="experience")
+        db.db.collection.update_one({"username": data['username']}, {"$set":{"repos": repos,"experiences": experiences}})
+
+        return "bullets generated"
     else:
         return "user not found"
     
-@app.route("/generateexperiencebullets", methods=['post'])
-def genexpbullets():
-    data = request.json
-    existing_user = db.db.collection.find_one({"username": data['username']})
-    if existing_user != None:
-        db.db.collection.update_one({"username": data['username']}, {"$set":{"experiences": data['experiences']}})
-        existing_user = db.db.collection.find_one({"username": data['username']})
-        experiences = existing_user['experiences']
-        experiences = get_multiple_bullets(experiences, prompt="experience")
-        db.db.collection.update_one({"username": data['username']}, {"$set":{"experiences": experiences}})
-        return experiences
-    else:
-        return "user not found"
 
 @app.route("/clear")
 def clear():
