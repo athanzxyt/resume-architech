@@ -80,7 +80,7 @@ export default function form4(props) {
   };
 
   return (
-    <div className="sign-up-container">
+    <div className="w-screen">
       <div className="grid grid-cols-2 gap-4 p-8">
         <div className="flex flex-col p-8">
           <h1 className="text-3xl font-bold pb-4">Input GitHub Username</h1>

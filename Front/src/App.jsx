@@ -9,8 +9,6 @@ import Logout from "./pages/Logout.jsx";
 import MyProjects from "./pages/MyProjects.jsx";
 import ProjectBullets from "./pages/ProjectBullets.jsx";
 import Apply from "./pages/Apply.jsx";
-import Experience from "./pages/Experience.jsx";
-import ExperienceBullets from "./pages/ExperienceBullets.jsx";
 
 export default function App() {
   let authenticated = localStorage.getItem("username") ? true : false;
@@ -53,7 +51,6 @@ export default function App() {
           }
         />
         <Route path="/finalize-resume" element={<FinalizeResume />} />
-        <Route path="/experience" element={<Experience />} />
         <Route
           path="apply"
           element={
