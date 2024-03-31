@@ -16,7 +16,7 @@ export default function form4(props) {
         },
       })
       .then((res) => {
-        setProjects(res.data.repos);
+        setProjects(res.data.repos ?? {});
         console.log(res.data.repos);
       })
       .catch((err) => {
@@ -84,21 +84,6 @@ export default function form4(props) {
       });
   };
 
-  const generate = () => {
-    axios
-      .post("http://localhost:8000/generatebullets", {
-        username: window.localStorage.getItem("username"),
-        repos: projects,
-      })
-      .then((res) => {
-        console.log(res.data);
-        window.location.href = "/projectbullets";
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
   return (
     <div className="w-screen">
       <div className="grid grid-cols-2 gap-4 p-8">
@@ -113,7 +98,7 @@ export default function form4(props) {
           />
           <div className="flex flex-row">
             <button
-              className="w-1/2 p-2 border-2 rounded-md mb-8 mr-4"
+              className="w-1/2 p-2 border-2 rounded-md mb-8 mr-4 text-white bg-black"
               onClick={scrapeGithub} // NEED TO CHANGE THIS TO A DIFF FUNCTION
             >
               {" "}
@@ -144,9 +129,6 @@ export default function form4(props) {
             onClick={addProject}
           >
             Add
-          </button>
-          <button className="w-1/2 p-2 border-2 rounded-md" onClick={generate}>
-            Generate Bullets
           </button>
         </div>
         <div className="flex justify-top items-top bg-gradient-to-r from-blue-100 to-green-200 rounded-xl border-4 border-slate-500">

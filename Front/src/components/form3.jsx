@@ -63,21 +63,6 @@ export default function form3() {
       });
   };
 
-  const generate = () => {
-    axios
-      .post("http://localhost:8000/generateexperiencebullets", {
-        username: window.localStorage.getItem("username"),
-        experiences: experiences,
-      })
-      .then((res) => {
-        console.log(res.data);
-        window.location.href = "/experiencebullets";
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
   return (
     <div className="w-screen">
         <div className="grid grid-cols-2 gap-4 p-8">
@@ -97,7 +82,6 @@ export default function form3() {
                 onChange={(e) => setExperienceDescription(e.target.value)}
             />
             <button className='w-1/2 p-2 border-2 rounded-md mb-8' onClick={addExperience}>Add</button>
-            <button className='w-1/2 p-2 border-2 rounded-md' onClick={generate}>Generate Bullets</button>
         </div>
         <div className="flex justify-top items-top bg-gradient-to-r from-blue-100 to-green-200 rounded-xl border-4 border-slate-500">
           <div className="flex justify-top w-full">
