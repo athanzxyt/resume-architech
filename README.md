@@ -2,6 +2,10 @@
 Maximizing job application success through an automatic resume tailor. Using Large Language Models and Semantic Vector Search to maximize candidate potential.
 ArchiTech and are excited to use these technologies in future projects!
 
+```python ./Back/server.py```
+```cd ./Front
+npm run dev```
+
 ## Inspiration 💡
 I'm sure all of you have also experienced the pain of trying to apply to hundreds of job postings only to hear back 4 months later that the position you applied to has already been filled. Well, we were sick of it! 
 
