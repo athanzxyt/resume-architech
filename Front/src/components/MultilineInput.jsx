@@ -53,17 +53,6 @@ function MultilineInput() {
       <div className="border-2 border-[#55c1bd] p-2.5 mb-5 text-center w-full box-border">
         Enter job description:
       </div>
-      {/* <div>
-        <Document
-          renderMode="canvas"
-          file={url}
-          onLoadSuccess={onDocumentLoadSuccess}
-        >
-          {Array.from(new Array(numPages), (el, index) => (
-            <Page key={`page_${index + 1}`} pageNumber={index + 1} />
-          ))}
-        </Document>
-      </div> */}
       <textarea
         value={textValue}
         onChange={handleChange}
@@ -107,6 +96,7 @@ function MultilineInput() {
           >
             Download
           </button>
+          <iframe src={downloadPath} frameborder="0"></iframe>
         </a>
       )}
     </div>
