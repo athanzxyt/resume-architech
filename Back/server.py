@@ -156,7 +156,7 @@ def return_pdf(username):
     try:
         file_path = f'./pdfs/{username}_resume.docx'
         if os.path.isfile(file_path):
-            return send_file(file_path, as_attachment=True)
+            return send_file(file_path, as_attachment=False)
         else:
             return make_response(f"File '{username}' not found.", 404)
     except Exception as e:

@@ -53,19 +53,17 @@ function MultilineInput() {
       <div className="border-2 border-[#55c1bd] p-2.5 mb-5 text-center w-full box-border">
         Enter job description:
       </div>
-      <div>
+      {/* <div>
         <Document
-            file={`./athan_resume.pdf`}
-            onLoadSuccess={onDocumentLoadSuccess}
+          renderMode="canvas"
+          file={url}
+          onLoadSuccess={onDocumentLoadSuccess}
         >
-            {Array.from(
-            new Array(numPages),
-            (el, index) => (
-                <Page key={`page_${index + 1}`} pageNumber={index + 1} />
-            ),
-            )}
+          {Array.from(new Array(numPages), (el, index) => (
+            <Page key={`page_${index + 1}`} pageNumber={index + 1} />
+          ))}
         </Document>
-        </div>
+      </div> */}
       <textarea
         value={textValue}
         onChange={handleChange}
@@ -96,9 +94,8 @@ function MultilineInput() {
         Submit
       </button>
       {downloadPath && (
-        <a href={downloadPath} target="blank">
+        <a href={downloadPath} target="_blank">
           <button
-            onClick={handleSubmit}
             style={{
               padding: "10px 20px",
               border: "1px solid #d0d0d0",
