@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import CardElement from "../components/CardElement";
 import axios from "axios";
 import { Accordion, Button } from "react-bootstrap";
 import { Container } from "react-bootstrap";

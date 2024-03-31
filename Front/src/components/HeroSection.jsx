@@ -49,13 +49,10 @@ const HeroSection = () => {
       </p>
       <div className="flex justify-center my-10 space-x-12 items-center">
         <a
-          href="personal-info"
+          href="login"
           className="bg-gradient-to-r from-yellow-100 to-green-200 py-3 px-4 border rounded-lg"
         >
           Get Started
-        </a>
-        <a href="#" className="bg-gradient-to-r from-green-200 to-blue-400 py-3 px-4 rounded-lg">
-          Sign In
         </a>
       </div>
     </div>
