@@ -116,9 +116,9 @@ def add_section_title(doc, title):
     p_border.append(bottom_border)
     p._element.get_or_add_pPr().append(p_border)
 
-def add_education(doc, school, degree, major, graduation_date):
+def add_education(doc, school, major, gpa, graduation_date):
     p = doc.add_paragraph()
-    run = p.add_run(f"{degree} in {major}, {school}, {graduation_date}")
+    run = p.add_run(f"{school} \t {major} \t GPA: {gpa} \t {graduation_date}")
     run.bold = True
 
 def add_experience(doc, 
@@ -162,12 +162,12 @@ def add_experience(doc,
 
     # Adjust the table to span the width of the document
     table.autofit = False
-    table.columns[0].width = Inches(3.5)
-    table.columns[1].width = Inches(3.5)
+    table.columns[0].width = Inches(3.75)
+    table.columns[1].width = Inches(3.75)
 
 
     for bullet in bullets:
-        p = doc.add_paragraph(f"  {bullet}", style='List Bullet')
+        p = doc.add_paragraph(f"  {bullet[2:]}", style='List Bullet')
         p.paragraph_format.left_indent = Pt(25)
         p.paragraph_format.space_before = Pt(0)
         p.paragraph_format.space_after = Pt(0)
@@ -188,6 +188,8 @@ def rank(df_exp, df_proj, budget = 30):
     # rank first vby 'keyword_count' and then for ties, rank by 'embedding' similarity
     df_exp['type'] = 'exp'
     df_proj['type'] = 'proj'
+
+
     df = pd.concat([df_exp, df_proj], ignore_index=True)
     sorted_df = df.sort_values(by=['keyword_count', 'similarity'], ascending=[False, False])
 
@@ -196,7 +198,27 @@ def rank(df_exp, df_proj, budget = 30):
     selected_proj = []
     total_cost = 0
 
+    used_proj = ''
+    used_exp = ''
+
     for _, row in sorted_df.iterrows():
+        if len(selected_exp) > 0 and len(selected_proj) > 0:
+            break
+
+        if row['type'] == 'exp' and len(selected_exp) == 0:
+            selected_exp.append(row)
+            unique_tags.add(row['title'])
+            total_cost += 1.5
+            used_exp = row['bullet']
+        if row['type'] == 'proj' and len(selected_proj) == 0:
+            selected_proj.append(row)
+            unique_tags.add(row['title'])
+            total_cost += 1.5
+            used_proj = row['bullet']
+
+    for _, row in sorted_df.iterrows():
+        if row['bullet'] == used_proj or row['bullet'] == used_exp:
+            continue
         row_cost = 1.5 + 2*(row['title'] not in unique_tags)
         if total_cost + row_cost <= budget:
             total_cost += row_cost
@@ -239,11 +261,11 @@ def make_resume(df_exp, df_proj, user):
     add_section_title(doc, 'Education')
     add_education(doc, user['school'], user['major'], user['gpa'], user['grad_year'])
 
-    exp, proj = rank(df_exp, df_proj, budget=40)
+    exp, proj = rank(df_exp, df_proj, budget=50)
 
     add_section_title(doc, 'Experience')
     for (title, date, company, location) in exp:
-        add_experience(doc, title, company, date, location, proj[(title, date, company, location)])
+        add_experience(doc, title, company, date, location, exp[(title, date, company, location)])
 
     add_section_title(doc, 'Projects')
     for row in proj:

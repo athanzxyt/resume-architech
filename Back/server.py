@@ -139,15 +139,15 @@ def getresume():
     data = []
     for experience_name in existing_user['experiences']:
         experience = existing_user['experiences'][experience_name]
-        if 'bullets' not in experience_name:
+        if 'bullets' not in experience:
             continue
         for bullet in experience['bullets']:
-            data.append((bullet, experience['name'], experience['date'], experience['company']))
-    data = pd.DataFrame(data, columns=["bullet", "title", "date", "company"])
+            data.append((bullet, experience['name'], experience['dates'], experience['company'], experience['location']))
+    data = pd.DataFrame(data, columns=["bullet", "title", "date", "company", "location"])
     df_exp = get_similiarity(job_desc, embed_data(data))
     df_exp = get_keyword_count(job_desc, df_exp)
 
-    filename = make_resume(df_proj, df_exp, existing_user)
+    filename = make_resume(df_exp, df_proj, existing_user)
     return filename
 
 @app.route("/download/<string:username>", methods=['GET'])
