@@ -12,6 +12,8 @@ transformers
 tensorflow
 spacy
 python-docx
+docx2pdf
+
 
 
 
