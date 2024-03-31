@@ -8,6 +8,7 @@ export default function form3() {
   let [experienceDescription, setExperienceDescription] = useState("");
   let [experienceCompany, setExperienceCompany] = useState("");
   let [experienceDates, setExperienceDates] = useState("");
+  let [experienceLocation, setExperienceLocation] = useState("");
 
   useEffect(() => {
     axios
@@ -29,6 +30,7 @@ export default function form3() {
       name: experienceName,
       readme: experienceDescription,
       company: experienceCompany,
+      location: experienceLocation,
       dates: experienceDates,
       selected: true,
     };
@@ -44,6 +46,7 @@ export default function form3() {
         setExperienceName("");
         setExperienceDescription("");
         setExperienceCompany("");
+        setExperienceLocation("");
         setExperienceDates("");
       })
       .catch((err) => {
@@ -87,6 +90,13 @@ export default function form3() {
             placeholder="Experience Company"
             value={experienceCompany}
             onChange={(e) => setExperienceCompany(e.target.value)}
+          />
+          <input
+            className="w-full border-2 rounded-md p-2 mb-4"
+            type="text"
+            placeholder="Experience Location"
+            value={experienceLocation}
+            onChange={(e) => setExperienceLocation(e.target.value)}
           />
           <input
             className="w-full border-2 rounded-md p-2 mb-4"
