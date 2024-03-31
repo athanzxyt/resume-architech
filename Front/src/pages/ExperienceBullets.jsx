@@ -58,7 +58,7 @@ export default function ExperienceBullets() {
                           type="text"
                           value={bullet}
                           onChange={(e) => {
-                            setProjects((prevExperiences) => {
+                            setExperiences((prevExperiences) => {
                               prevExperiences[experience.name].bullets[
                                 bullet_index
                               ] = e.target.value;
