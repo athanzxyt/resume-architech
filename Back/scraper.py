@@ -19,7 +19,7 @@ def get_repos(github_user):
     languages = requests.get(repo['languages_url'], headers=headers).json()
     readme = requests.get(f"https://raw.githubusercontent.com/{github_user}/{repo['name']}/{repo['default_branch']}/README.md", headers=headers).text
     print(f"https://raw.githubusercontent.com/{github_user}/{repo['name']}/{repo['default_branch']}/README.md")
-    parsed_repo = {"name":repo['name'], "url":repo['html_url'], "api_url":repo['url'], "languages":languages, "readme": readme}
+    parsed_repo = {"name":repo['name'], "url":repo['html_url'], "api_url":repo['url'], "languages":languages, "readme": readme, "selected": False}
     parsed_repos[repo['name']] = parsed_repo
 
   return parsed_repos

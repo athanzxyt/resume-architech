@@ -27,7 +27,7 @@ function Login() {
       .then((res) => {
         if (res.data.exists) {
           localStorage.setItem("username", username);
-          window.location.href = "/personal-info";
+          window.location.href = "/myprojects";
         } else {
           alert("Username does not exist");
         }

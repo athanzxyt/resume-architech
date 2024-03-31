@@ -1,18 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
-function CardElement({ project, barContent }) {
+function CardElement({ project, barContent, setProjects }) {
   const [showTextBox, setShowTextBox] = useState(false);
-  const [textBoxContent, setTextBoxContent] = useState('');
-
-  useEffect(() => {
-    const fetchData = async () => {
-      // You'd replace this with actual fetching logic
-      const serverResponse = project.readme; // Using passed prop for demo
-      setTextBoxContent(serverResponse);
-    };
-
-    fetchData();
-  }, [project.readme]); // Dependency array to avoid infinite loop
 
   return (
     <div className="card">
@@ -20,15 +9,24 @@ function CardElement({ project, barContent }) {
         <label>
           <input
             type="checkbox"
-            checked={showTextBox}
-            onChange={(e) => setShowTextBox(e.target.checked)}
+            checked={project.selected ?? false}
+            onChange={(e) => {
+              setProjects((prevProjects) => {
+                let newProjects = { ...prevProjects };
+                newProjects[project.name] = {
+                  ...project,
+                  selected: e.target.checked,
+                };
+                return newProjects;
+              });
+            }}
           />
           {barContent}
         </label>
       </div>
       {showTextBox && (
         <div className="dropdown">
-          <textarea value={textBoxContent} readOnly />
+          <textarea value={project.readme} readOnly />
         </div>
       )}
     </div>

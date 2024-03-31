@@ -44,7 +44,17 @@ export default function MyProjects() {
   };
 
   const generate = () => {
-    console.log("generating");
+    axios
+      .post("http://localhost:8000/generatebullets", {
+        username: window.localStorage.getItem("username"),
+      })
+      .then((res) => {
+        console.log(res.data);
+        window.location.href = "/projectbullets";
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -54,6 +64,7 @@ export default function MyProjects() {
           <CardElement
             key={index}
             project={project}
+            setProjects={setProjects}
             barContent={`Project ${index + 1}: ${project.name}`}
           />
         ))}
@@ -71,6 +82,7 @@ export default function MyProjects() {
         />
         <br />
         <button onClick={addProject}>add</button>
+        <br />
         <button onClick={generate}>Generate Bullets</button>
       </div>
     </>
