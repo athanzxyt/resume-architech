@@ -34,8 +34,8 @@ async def get_multiple_bullets_async(repos):
   tasks = []
   for repo_name in repos:
     repo = repos[repo_name]
-    # if len(repo.get('bullets',[])) != 0:
-    #   continue
+    if len(repo.get('bullets',[])) != 0:
+      continue
     print(repo_name)
     tasks.append(get_bullet_points(json.dumps(repo, sort_keys=True, indent=4), repo_name, repos))
   await asyncio.gather(*tasks)
