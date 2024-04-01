@@ -58,4 +58,4 @@ Furthermore, we want to figure out our parallelization for semantic embeddings s
 
 4. **Web-Hosting:** Host on Render.com with domain name resumearchi.tech
 5. **Database:** Use MongoDB
-6. **User Authentication:** Use Auth0.
+6. **User Authentication:** Self Designed
