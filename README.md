@@ -7,10 +7,10 @@
 ![GitHub Badge](https://img.shields.io/badge/GitHub_API-181717?logo=github&logoColor=fff&style=flat)
 
 Maximizing job application success through an automatic resume tailor. Using Large Language Models and Semantic Vector Search to maximize candidate potential.
-ArchiTech and are excited to use these technologies in future projects!
 
 ## Check it out!
 [resumearchi.tech](https://resume-architech.onrender.com/)
+
 *Unfortunately this domain is no longer being hosted as our free hackathon credits have expired*
 
 ![Home Screen](/readmeimg/HomeScreen.png)
