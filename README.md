@@ -8,10 +8,12 @@
 
 Maximizing job application success through an automatic resume tailor. Using Large Language Models and Semantic Vector Search to maximize candidate potential.
 
+*This project was a part of HackPrinceton 2024 (Best Web Hack, 2x Sponsor Prizes)*
+
 ## Check it out!
 [resumearchi.tech](https://resume-architech.onrender.com/)
 
-*Unfortunately this domain is no longer being hosted as our free hackathon credits have expired*
+*Unfortunately, this domain is no longer being hosted as our free hackathon credits have expired*
 
 ![Home Screen](/readmeimg/HomeScreen.png)
 ![Projects](/readmeimg/projects.png)
