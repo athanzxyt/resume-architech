@@ -1,9 +1,17 @@
 # resume-architech 
+
+![OpenAI Badge](https://img.shields.io/badge/OpenAI-412991?logo=openai&logoColor=fff&style=flat)
+![Flask Badge](https://img.shields.io/badge/Flask-000?logo=flask&logoColor=fff&style=flat)
+![MongoDB Badge](https://img.shields.io/badge/MongoDB-47A248?logo=mongodb&logoColor=fff&style=flat)
+![React Badge](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=000&style=flat)
+![GitHub Badge](https://img.shields.io/badge/GitHub_API-181717?logo=github&logoColor=fff&style=flat)
+
 Maximizing job application success through an automatic resume tailor. Using Large Language Models and Semantic Vector Search to maximize candidate potential.
 ArchiTech and are excited to use these technologies in future projects!
 
 ## Check it out!
 [resumearchi.tech](https://resume-architech.onrender.com/)
+*Unfortunately this domain is no longer being hosted as our free hackathon credits have expired*
 
 ![Home Screen](/readmeimg/HomeScreen.png)
 ![Projects](/readmeimg/projects.png)
@@ -56,6 +64,6 @@ Furthermore, we want to figure out our parallelization for semantic embeddings s
 
 # Front-End UI/UX
 
-4. **Web-Hosting:** Host on Render.com with domain name resumearchi.tech
+4. **Web-Hosting:** Host on Render.com with domain name resumearchi.tech (No longer being hosted)
 5. **Database:** Use MongoDB
 6. **User Authentication:** Self designed
